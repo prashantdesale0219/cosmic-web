@@ -4,24 +4,72 @@ import { productService } from '../../services/api'
 
 const Products = () => {
   const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   
+  // Static product data
+  const staticProducts = [
+    {
+      _id: 'sp001',
+      title: 'Premium Solar Panel 450W',
+      image: '/solar-panels.jpg',
+      hoverImage: '/solar1_hover.png',
+      category: 'Solar Panels',
+      newPrice: 25000,
+      oldPrice: 30000,
+      rating: 4.8
+    },
+    {
+      _id: 'sp002',
+      title: 'Monocrystalline Solar Panel 550W',
+      image: '/solar1.png',
+      hoverImage: '/solar-panels.jpg',
+      category: 'Solar Panels',
+      newPrice: 32000,
+      oldPrice: 35000,
+      rating: 4.9
+    },
+    {
+      _id: 'inv001',
+      title: 'Solar Inverter 5kW',
+      image: '/solar_design.png',
+      category: 'Inverters',
+      newPrice: 45000,
+      oldPrice: 50000,
+      rating: 4.7
+    },
+    {
+      _id: 'bat001',
+      title: 'Lithium Battery 10kWh',
+      image: '/installation.jpg',
+      category: 'Batteries',
+      newPrice: 75000,
+      oldPrice: 85000,
+      rating: 4.6
+    },
+    {
+      _id: 'acc001',
+      title: 'Solar Panel Mounting Kit',
+      image: '/site-assessment.jpg',
+      category: 'Accessories',
+      newPrice: 8000,
+      oldPrice: 10000,
+      rating: 4.5
+    },
+    {
+      _id: 'acc002',
+      title: 'Solar Charge Controller 60A',
+      image: '/quality-assurance.jpg',
+      category: 'Accessories',
+      newPrice: 12000,
+      oldPrice: 15000,
+      rating: 4.4
+    }
+  ];
+  
   useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        setLoading(true);
-        const response = await productService.getActiveProducts();
-        setProducts(response.data.data || response.data);
-        setLoading(false);
-      } catch (err) {
-        console.error('Error fetching products:', err);
-        setError('Failed to load products. Please try again later.');
-        setLoading(false);
-      }
-    };
-    
-    fetchProducts();
+    // Set static products instead of fetching from API
+    setProducts(staticProducts);
   }, []);
 
   return (

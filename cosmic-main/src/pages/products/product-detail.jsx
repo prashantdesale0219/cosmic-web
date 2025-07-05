@@ -31,72 +31,218 @@ const ProductDetail = () => {
     'Eco-friendly solution'
   ];
 
+  // Static product data
+  const staticProducts = [
+    {
+      _id: 'sp001',
+      title: 'Premium Solar Panel 450W',
+      image: '/solar-panels.jpg',
+      hoverImage: '/solar1_hover.png',
+      category: 'Solar Panels',
+      newPrice: '₹25,000',
+      oldPrice: '₹30,000',
+      rating: 4.8,
+      description: 'High-efficiency monocrystalline solar panel with 450W output. Perfect for residential installations with limited roof space. These panels offer excellent performance even in low-light conditions.',
+      specifications: {
+        brand: 'Cosmic Solar',
+        model: 'CS-450M',
+        warranty: '25 Years',
+        efficiency: '21.5%',
+        dimensions: '1700 x 1000 x 35 mm',
+        weight: '19.5 kg',
+        cellType: 'Monocrystalline',
+        powerOutput: '450W',
+        operatingTemperature: '-40°C to +85°C',
+        description: 'High-efficiency monocrystalline solar panel with 450W output. Perfect for residential installations with limited roof space. These panels offer excellent performance even in low-light conditions.',
+        features: [
+          'High conversion efficiency of 21.5%',
+          'Anti-reflective, high transmission glass',
+          'Excellent performance in low-light environments',
+          'Robust aluminum frame for extended outdoor use',
+          'PID resistant and salt mist corrosion resistant',
+          'Certified to withstand high wind loads and snow loads'
+        ],
+        reviews: defaultReviews
+      }
+    },
+    {
+      _id: 'sp002',
+      title: 'Monocrystalline Solar Panel 550W',
+      image: '/solar1.png',
+      hoverImage: '/solar-panels.jpg',
+      category: 'Solar Panels',
+      newPrice: '₹32,000',
+      oldPrice: '₹35,000',
+      rating: 4.9,
+      description: 'Ultra-high efficiency 550W solar panel with advanced cell technology. Ideal for maximizing energy production in limited spaces.',
+      specifications: {
+        brand: 'Cosmic Solar',
+        model: 'CS-550M-Pro',
+        warranty: '30 Years',
+        efficiency: '22.8%',
+        dimensions: '2000 x 1050 x 35 mm',
+        weight: '22 kg',
+        cellType: 'Monocrystalline PERC',
+        powerOutput: '550W',
+        operatingTemperature: '-40°C to +85°C',
+        description: 'Ultra-high efficiency 550W solar panel with advanced cell technology. Ideal for maximizing energy production in limited spaces.',
+        features: [
+          'Industry-leading efficiency of 22.8%',
+          'PERC cell technology for superior performance',
+          'Excellent low-light performance',
+          'Enhanced durability with reinforced frame design',
+          'Anti-PID technology',
+          'Certified for harsh environmental conditions'
+        ],
+        reviews: defaultReviews
+      }
+    },
+    {
+      _id: 'inv001',
+      title: 'Solar Inverter 5kW',
+      image: '/solar_design.png',
+      category: 'Inverters',
+      newPrice: '₹45,000',
+      oldPrice: '₹50,000',
+      rating: 4.7,
+      description: 'High-efficiency 5kW solar inverter with smart monitoring capabilities. Compatible with both on-grid and hybrid solar systems.',
+      specifications: {
+        brand: 'Cosmic Power',
+        model: 'CP-5000H',
+        warranty: '10 Years',
+        efficiency: '98.2%',
+        dimensions: '450 x 380 x 150 mm',
+        weight: '18 kg',
+        type: 'Hybrid',
+        capacity: '5kW',
+        mpptChannels: '2',
+        description: 'High-efficiency 5kW solar inverter with smart monitoring capabilities. Compatible with both on-grid and hybrid solar systems.',
+        features: [
+          'Dual MPPT channels for optimal energy harvest',
+          'Wi-Fi monitoring with smartphone app',
+          'Compatible with lithium and lead-acid batteries',
+          'IP65 rated for outdoor installation',
+          'Integrated anti-islanding protection',
+          'Low voltage ride through capability'
+        ],
+        reviews: defaultReviews
+      }
+    },
+    {
+      _id: 'bat001',
+      title: 'Lithium Battery 10kWh',
+      image: '/installation.jpg',
+      category: 'Batteries',
+      newPrice: '₹75,000',
+      oldPrice: '₹85,000',
+      rating: 4.6,
+      description: 'High-capacity 10kWh lithium iron phosphate battery for solar energy storage. Long cycle life and excellent safety features.',
+      specifications: {
+        brand: 'Cosmic Energy',
+        model: 'CE-10000L',
+        warranty: '10 Years',
+        capacity: '10kWh',
+        dimensions: '600 x 450 x 200 mm',
+        weight: '85 kg',
+        chemistry: 'LiFePO4',
+        cycles: '6000+ cycles',
+        depthOfDischarge: '95%',
+        description: 'High-capacity 10kWh lithium iron phosphate battery for solar energy storage. Long cycle life and excellent safety features.',
+        features: [
+          'Safe and stable LiFePO4 chemistry',
+          'Built-in BMS (Battery Management System)',
+          'Modular design for easy expansion',
+          'Wall-mountable slim design',
+          'CAN bus communication for inverter compatibility',
+          'Temperature controlled operation'
+        ],
+        reviews: defaultReviews
+      }
+    },
+    {
+      _id: 'acc001',
+      title: 'Solar Panel Mounting Kit',
+      image: '/site-assessment.jpg',
+      category: 'Accessories',
+      newPrice: '₹8,000',
+      oldPrice: '₹10,000',
+      rating: 4.5,
+      description: 'Complete mounting solution for residential rooftop solar installations. Includes all necessary hardware for secure panel mounting.',
+      specifications: {
+        brand: 'Cosmic Mount',
+        model: 'CM-RTS10',
+        warranty: '15 Years',
+        material: 'Anodized Aluminum',
+        compatibility: 'All standard solar panels',
+        maxWindLoad: '180 km/h',
+        description: 'Complete mounting solution for residential rooftop solar installations. Includes all necessary hardware for secure panel mounting.',
+        features: [
+          'Pre-assembled components for quick installation',
+          'Adjustable tilt angles from 10° to 30°',
+          'Corrosion-resistant anodized aluminum',
+          'Includes grounding components',
+          'Universal clamps fit most panel frames',
+          'Engineered for high wind and snow loads'
+        ],
+        reviews: defaultReviews
+      }
+    },
+    {
+      _id: 'acc002',
+      title: 'Solar Charge Controller 60A',
+      image: '/quality-assurance.jpg',
+      category: 'Accessories',
+      newPrice: '₹12,000',
+      oldPrice: '₹15,000',
+      rating: 4.4,
+      description: 'Advanced MPPT solar charge controller with 60A capacity. Maximizes charging efficiency for off-grid solar systems.',
+      specifications: {
+        brand: 'Cosmic Control',
+        model: 'CC-60MPPT',
+        warranty: '5 Years',
+        type: 'MPPT',
+        current: '60A',
+        voltage: '12V/24V/48V Auto',
+        maxPVInput: '150V',
+        description: 'Advanced MPPT solar charge controller with 60A capacity. Maximizes charging efficiency for off-grid solar systems.',
+        features: [
+          'Advanced MPPT tracking algorithm',
+          'LCD display with system information',
+          'Multiple battery chemistry support',
+          'Programmable charging parameters',
+          'Built-in temperature compensation',
+          'RS485 communication port for monitoring'
+        ],
+        reviews: defaultReviews
+      }
+    }
+  ];
+
   // Create a reference to productSpecs for use in the component
   const productSpecs = product?.specifications || {};
 
   useEffect(() => {
-    const fetchProductDetails = async () => {
-      try {
-        setLoading(true);
-        const response = await productService.getProductById(id);
-        const productData = response.data.data || response.data;
+    // Find the product by ID from static data
+    const findProduct = () => {
+      setLoading(true);
+      const foundProduct = staticProducts.find(p => p._id === id);
+      
+      if (foundProduct) {
+        setProduct(foundProduct);
         
-        if (productData) {
-          // If product has images, set the first one as selected
-          if (productData.images && productData.images.length > 0) {
-            setSelectedImage(0);
-          }
-          
-          // If the product doesn't have specifications, create a default structure
-          if (!productData.specifications) {
-            productData.specifications = {};
-            
-            // Add basic specs from product data if available
-            if (productData.price) productData.specifications.price = `₹${productData.price}`;
-            if (productData.category) productData.specifications.category = productData.category;
-            if (productData.brand) productData.specifications.brand = productData.brand;
-            if (productData.model) productData.specifications.model = productData.model;
-            if (productData.warranty) productData.specifications.warranty = productData.warranty;
-            
-            // Use product description if available
-            if (productData.description) {
-              productData.specifications.description = productData.description;
-            }
-            
-            // Use product features or default features
-            productData.specifications.features = productData.features || defaultFeatures;
-            
-            // Use product reviews or default reviews
-            productData.specifications.reviews = productData.reviews || defaultReviews;
-          }
-          
-          setProduct(productData);
-          
-          // Fetch related products (products in the same category)
-          try {
-            const relatedResponse = await productService.getActiveProducts();
-            const allProducts = relatedResponse.data.data || relatedResponse.data;
-            
-            // Filter products in the same category, excluding the current product
-            const related = allProducts.filter(p => 
-              p.category === productData.category && p._id !== productData._id
-            ).slice(0, 4); // Limit to 4 related products
-            
-            setRelatedProducts(related);
-          } catch (error) {
-            console.error('Error fetching related products:', error);
-            setRelatedProducts([]);
-          }
-        }
-      } catch (error) {
-        console.error('Error fetching product details:', error);
-      } finally {
-        setLoading(false);
+        // Set related products (products in the same category)
+        const related = staticProducts.filter(p => 
+          p.category === foundProduct.category && p._id !== foundProduct._id
+        ).slice(0, 4); // Limit to 4 related products
+        
+        setRelatedProducts(related);
       }
+      
+      setLoading(false);
     };
     
     if (id) {
-      fetchProductDetails();
+      findProduct();
     }
   }, [id]);
 
