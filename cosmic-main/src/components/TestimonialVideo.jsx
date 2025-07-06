@@ -1,7 +1,10 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { FaQuoteLeft, FaQuoteRight, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import { FaQuoteLeft, FaQuoteRight, FaChevronLeft, FaChevronRight, FaUsers, FaProjectDiagram, FaSolarPanel, FaBolt } from 'react-icons/fa';
 
+// This component is now repurposed as a Happy Clients section with company stats
+
+// Legacy testimonials data - kept for reference but not used in the new design
 const testimonials = [
   {
     id: 1,
@@ -65,26 +68,98 @@ const testimonials = [
   },
 ];
 
+// Company stats data for the Happy Clients section
+const companyStats = [
+  {
+    id: 1,
+    value: 30,
+    label: 'Years of Experience',
+    icon: FaUsers,
+    color: '#9fc22f',
+    suffix: '+',
+    animationDelay: 0
+  },
+  {
+    id: 2,
+    value: 10000,
+    label: 'Successful Projects',
+    icon: FaProjectDiagram,
+    color: '#003e63',
+    suffix: '+',
+    animationDelay: 0.2
+  },
+  {
+    id: 3,
+    value: 2,
+    label: 'Modules Shipped',
+    icon: FaSolarPanel,
+    color: '#9fc22f',
+    suffix: 'M+',
+    animationDelay: 0.4
+  },
+  {
+    id: 4,
+    value: 1.5,
+    label: 'PV Modules Manufacturing Capacity',
+    icon: FaBolt,
+    color: '#003e63',
+    suffix: 'GW',
+    description: '+2.5 GW Under Development',
+    animationDelay: 0.6
+  }
+];
+
 const TestimonialVideo = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(true);
+  const [animatedValues, setAnimatedValues] = useState(companyStats.map(() => 0));
+  const [hasAnimated, setHasAnimated] = useState(false);
+  const sectionRef = useRef(null);
   const videoRef = useRef(null);
-  const intervalRef = useRef(null);
   
-  // Auto-advance testimonials
+  // Handle counter animation
   useEffect(() => {
-    if (isPlaying) {
-      intervalRef.current = setInterval(() => {
-        setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonials.length);
-      }, 8000); // Change testimonial every 8 seconds
-    }
-    
-    return () => {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
+    const handleScroll = () => {
+      if (!sectionRef.current || hasAnimated) return;
+      
+      const rect = sectionRef.current.getBoundingClientRect();
+      const isVisible = rect.top < window.innerHeight && rect.bottom >= 0;
+      
+      if (isVisible) {
+        setHasAnimated(true);
+        
+        companyStats.forEach((stat, index) => {
+          const targetValue = stat.value;
+          const duration = 2000; // 2 seconds for animation
+          const frameDuration = 1000 / 60; // 60fps
+          const totalFrames = Math.round(duration / frameDuration);
+          let frame = 0;
+          
+          const counter = setInterval(() => {
+            frame++;
+            const progress = frame / totalFrames;
+            const currentValue = easeOutQuad(progress) * targetValue;
+            
+            setAnimatedValues(prev => {
+              const newValues = [...prev];
+              newValues[index] = currentValue;
+              return newValues;
+            });
+            
+            if (frame === totalFrames) {
+              clearInterval(counter);
+            }
+          }, frameDuration);
+        });
       }
     };
-  }, [isPlaying]);
+    
+    // Easing function for smoother animation
+    const easeOutQuad = t => t * (2 - t);
+    
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Check on mount
+    
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [hasAnimated]);
   
   // Ensure video is always playing
   useEffect(() => {
@@ -108,46 +183,33 @@ const TestimonialVideo = () => {
     }
   }, []);
   
-  const nextTestimonial = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonials.length);
-    // Reset the auto-advance timer
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current);
-    }
-    if (isPlaying) {
-      intervalRef.current = setInterval(() => {
-        setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonials.length);
-      }, 8000);
-    }
-  };
-  
-  const prevTestimonial = () => {
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + testimonials.length) % testimonials.length);
-    // Reset the auto-advance timer
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current);
-    }
-    if (isPlaying) {
-      intervalRef.current = setInterval(() => {
-        setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonials.length);
-      }, 8000);
-    }
-  };
-
-  const currentTestimonial = testimonials[currentIndex];
-
   return (
-    <section className="w-full py-16 bg-gray-100 overflow-hidden">
+    <section ref={sectionRef} className="w-full py-16 bg-gray-800 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-yellow-green-900 leading-tight">
-            WATCH AND BUY
-          </h2>
+          <motion.p
+            initial={{ opacity: 0, y: -10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+            className="text-sm uppercase tracking-widest text-[#9fc22f] font-semibold mb-2"
+          >
+            About Solex Energy Limited
+          </motion.p>
+          <motion.h2
+            initial={{ opacity: 0, y: -10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            viewport={{ once: true }}
+            className="text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-tight font-space-grotesk"
+          >
+            Happy Clients
+          </motion.h2>
         </div>
         
         <div className="relative">
           {/* Background Video */}
-          <div className="absolute inset-0 w-full h-full overflow-hidden z-0 opacity-10">
+          <div className="absolute inset-0 w-full h-full overflow-hidden z-0 opacity-20">
             <video
               ref={videoRef}
               className="w-full h-full object-cover"
@@ -162,116 +224,152 @@ const TestimonialVideo = () => {
           </div>
           
           <div className="relative z-10">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-              {/* Testimonial Section */}
-              <div className="lg:col-span-5 flex flex-col justify-center">
+            {/* Company Introduction */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-16">
+              <div className="lg:col-span-5">
                 <motion.div
-                  key={currentTestimonial.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ duration: 0.5 }}
-                  className="bg-white rounded-xl p-8 shadow-lg"
+                  initial={{ opacity: 0, x: -30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.6 }}
+                  viewport={{ once: true }}
                 >
-                  <div className="flex items-start mb-6">
-                    <FaQuoteLeft className="text-yellow-green-500 text-4xl mr-4 flex-shrink-0 mt-1" />
-                    <p className="text-gray-700 text-lg italic">{currentTestimonial.quote}</p>
-                    <FaQuoteRight className="text-yellow-green-500 text-4xl ml-4 flex-shrink-0 mt-1" />
-                  </div>
-                  
-                  <div className="flex items-center">
-                    <img 
-                      src={currentTestimonial.image} 
-                      alt={currentTestimonial.name}
-                      className="w-16 h-16 rounded-full object-cover mr-4"
-                    />
-                    <div>
-                      <h4 className="font-bold text-gray-900">{currentTestimonial.name}</h4>
-                      <p className="text-yellow-green-600">{currentTestimonial.role}</p>
-                    </div>
-                  </div>
+                  <img 
+                    src="/solex-logo-30.png" 
+                    alt="Solex Energy 30 Years" 
+                    className="w-full h-auto rounded-lg shadow-lg"
+                  />
                 </motion.div>
-                
-                <div className="flex justify-center mt-6 space-x-4">
-                  <button 
-                    onClick={prevTestimonial}
-                    className="p-2 rounded-full bg-yellow-green-500 text-white hover:bg-yellow-green-600 transition-colors"
-                  >
-                    <FaChevronLeft className="w-5 h-5" />
-                  </button>
-                  <button 
-                    onClick={nextTestimonial}
-                    className="p-2 rounded-full bg-yellow-green-500 text-white hover:bg-yellow-green-600 transition-colors"
-                  >
-                    <FaChevronRight className="w-5 h-5" />
-                  </button>
-                </div>
               </div>
               
-              {/* Product Display Section */}
-              <div className="lg:col-span-7">
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {testimonials.map((item, index) => (
-                    <motion.div
-                      key={item.id}
-                      initial={{ opacity: 0, scale: 0.9 }}
-                      animate={{ 
-                        opacity: 1, 
-                        scale: 1,
-                        transition: { delay: index * 0.1 }
-                      }}
-                      className={`relative overflow-hidden rounded-lg shadow-md transition-all duration-300 ${currentIndex === index ? 'ring-4 ring-yellow-green-500' : ''}`}
-                    >
-                      {/* Discount Badge */}
-                      <div className="absolute top-2 left-2 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded z-10">
-                        {item.discount}
-                      </div>
-                      
-                      {/* Views Counter */}
-                      <div className="absolute top-2 right-2 bg-black bg-opacity-60 text-white text-xs px-2 py-1 rounded-full flex items-center z-10">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                        </svg>
-                        {Math.floor(Math.random() * 30) + 10}
-                      </div>
-                      
-                      {/* Product Image */}
-                      <div className="h-48 overflow-hidden">
-                        <img 
-                          src={item.productImage} 
-                          alt={item.productName}
-                          className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
-                        />
-                      </div>
-                      
-                      {/* Product Info */}
-                      <div className="p-4 bg-white">
-                        <h3 className="font-semibold text-sm text-gray-900 line-clamp-2 h-10">
-                          {item.productName}
-                        </h3>
-                        
-                        <div className="flex justify-between items-center mt-2">
-                          <button 
-                            onClick={() => setCurrentIndex(index)}
-                            className="text-xs bg-yellow-green-500 hover:bg-yellow-green-600 text-white px-3 py-1 rounded transition-colors"
-                          >
-                            View Details
-                          </button>
-                          
-                          <button className="text-xs border border-yellow-green-500 text-yellow-green-600 hover:bg-yellow-green-50 px-3 py-1 rounded transition-colors">
-                            Add to cart
-                          </button>
-                        </div>
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
+              <div className="lg:col-span-7 flex flex-col justify-center">
+                <motion.div
+                  initial={{ opacity: 0, x: 30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.6 }}
+                  viewport={{ once: true }}
+                  className="space-y-4"
+                >
+                  <h3 className="text-2xl font-bold text-white font-space-grotesk">At Solex Energy Limited</h3>
+                  <p className="text-gray-300">
+                    We are dedicated to leading the renewable energy sector by harnessing the power of solar to build a greener world. Specializing in sustainable, cost-effective solutions for residential, commercial, and industrial clients, we combine innovation with advanced technologies to drive global zero-carbon development. As a trusted partner in clean energy, we are committed to paving the way for a sustainable future.
+                  </p>
+                </motion.div>
               </div>
             </div>
+            
+            {/* Stats Counters */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
+              {companyStats.map((stat, index) => (
+                <motion.div
+                  key={stat.id}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: stat.animationDelay }}
+                  viewport={{ once: true }}
+                  className="bg-gray-900 rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 text-center relative overflow-hidden group border border-gray-700"
+                >
+                  {/* Background circle decoration */}
+                  <div 
+                    className="absolute -right-10 -top-10 w-40 h-40 rounded-full opacity-10 transition-all duration-500 group-hover:scale-125"
+                    style={{ backgroundColor: stat.color }}
+                  />
+                  
+                  {/* Icon */}
+                  <div className="flex justify-center mb-4">
+                    <div 
+                      className="w-16 h-16 rounded-full flex items-center justify-center text-white text-2xl"
+                      style={{ backgroundColor: stat.color }}
+                    >
+                      <stat.icon size={28} />
+                    </div>
+                  </div>
+                  
+                  {/* Counter */}
+                  <div className="mb-2 flex items-center justify-center">
+                    <h3 className="text-4xl font-bold" style={{ color: stat.color }}>
+                      {stat.id === 3 || stat.id === 4 
+                        ? animatedValues[index].toFixed(1) 
+                        : Math.round(animatedValues[index])}
+                    </h3>
+                    <span className="text-2xl font-bold ml-1" style={{ color: stat.color }}>
+                      {stat.suffix}
+                    </span>
+                  </div>
+                  
+                  {/* Label */}
+                  <p className="text-gray-300 font-medium">{stat.label}</p>
+                  
+                  {/* Description (if any) */}
+                  {stat.description && (
+                    <p className="text-sm text-gray-400 mt-2">{stat.description}</p>
+                  )}
+                  
+                  {/* Animated border effect */}
+                  <motion.div 
+                    className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-transparent via-yellow-400 to-transparent"
+                    initial={{ width: '0%', x: '-100%' }}
+                    animate={{ 
+                      width: '100%', 
+                      x: ['-100%', '100%'],
+                      transition: { 
+                        x: { repeat: Infinity, duration: 2, ease: 'linear' },
+                        width: { duration: 0.4 }
+                      }
+                    }}
+                    style={{ backgroundColor: stat.color }}
+                  />
+                </motion.div>
+              ))}
+            </div>
+            
+            {/* CTA Button */}
+            <motion.div 
+              className="mt-12 text-center"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.8 }}
+              viewport={{ once: true }}
+            >
+              <a 
+                href="/about" 
+                className="inline-flex items-center px-6 py-3 bg-[#9fc22f] text-black font-semibold rounded-full hover:bg-[#8db327] transition-colors shadow-lg hover:shadow-xl group"
+              >
+                <span>Learn More About Us</span>
+                <svg 
+                  xmlns="http://www.w3.org/2000/svg" 
+                  className="h-5 w-5 ml-2 transform transition-transform group-hover:translate-x-1" 
+                  fill="none" 
+                  viewBox="0 0 24 24" 
+                  stroke="currentColor"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </a>
+            </motion.div>
           </div>
         </div>
       </div>
+      
+      {/* Animation keyframes */}
+      <style jsx>{`
+        @keyframes float {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-10px); }
+        }
+        
+        @keyframes pulse {
+          0%, 100% { opacity: 1; transform: scale(1); }
+          50% { opacity: 0.8; transform: scale(1.05); }
+        }
+        
+        .float-animation {
+          animation: float 3s ease-in-out infinite;
+        }
+        
+        .pulse-animation {
+          animation: pulse 2s ease-in-out infinite;
+        }
+      `}</style>
     </section>
   );
 };

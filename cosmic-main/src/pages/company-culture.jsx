@@ -301,7 +301,7 @@ const CompanyCulture = () => {
               viewport={{ once: true }}
               className="bg-white/10 backdrop-blur-sm p-8 rounded-lg border-l-4 border-[#9fc22f]"
             >
-              <h3 className="text-xl font-bold mb-4 text-[#003e63]">Carbon-Neutral Operations</h3>
+              <h3 className="text-xl font-bold mb-4 text-[#9fc22f]">Carbon-Neutral Operations</h3>
               <p className="text-white">
                   Our facilities are powered by 100% renewable energy, and we offset any remaining carbon footprint through verified carbon credit programs.
                 </p>
@@ -314,7 +314,7 @@ const CompanyCulture = () => {
               viewport={{ once: true }}
               className="bg-white/10 backdrop-blur-sm p-8 rounded-lg border-l-4 border-[#9fc22f]"
             >
-              <h3 className="text-xl font-bold mb-4 text-[#003e63]">Waste Reduction</h3>
+              <h3 className="text-xl font-bold mb-4 text-[#9fc22f]">Waste Reduction</h3>
               <p className="text-white">
                   We've implemented comprehensive recycling programs and are working toward zero-waste manufacturing processes across all our facilities.
                 </p>
@@ -327,7 +327,7 @@ const CompanyCulture = () => {
               viewport={{ once: true }}
               className="bg-white/10 backdrop-blur-sm p-8 rounded-lg border-l-4 border-[#9fc22f]"
             >
-              <h3 className="text-xl font-bold mb-4 text-[#003e63]">Community Initiatives</h3>
+              <h3 className="text-xl font-bold mb-4 text-[#9fc22f]">Community Initiatives</h3>
               <p className="text-white">
                   We partner with local communities to promote environmental education and support renewable energy projects in underserved areas.
                 </p>
