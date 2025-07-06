@@ -184,9 +184,9 @@ const TestimonialVideo = () => {
   }, []);
   
   return (
-    <section ref={sectionRef} className="w-full py-16 bg-gray-800 overflow-hidden">
+    <section ref={sectionRef} className="w-full py-12 bg-gray-800 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
+        <div className="text-center mb-10">
           <motion.p
             initial={{ opacity: 0, y: -10 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -201,7 +201,7 @@ const TestimonialVideo = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
             viewport={{ once: true }}
-            className="text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-tight font-space-grotesk"
+            className="text-2xl sm:text-3xl md:text-4xl font-bold text-white leading-tight font-space-grotesk"
           >
             Happy Clients
           </motion.h2>
@@ -225,7 +225,7 @@ const TestimonialVideo = () => {
           
           <div className="relative z-10">
             {/* Company Introduction */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-16">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-12">
               <div className="lg:col-span-5">
                 <motion.div
                   initial={{ opacity: 0, x: -30 }}
@@ -234,9 +234,9 @@ const TestimonialVideo = () => {
                   viewport={{ once: true }}
                 >
                   <img 
-                    src="/solex-logo-30.png" 
+                    src="/back_Image.avif" 
                     alt="Solex Energy 30 Years" 
-                    className="w-full h-auto rounded-lg shadow-lg"
+                    className="w-full h-auto rounded-lg shadow-md"
                   />
                 </motion.div>
               </div>
@@ -258,7 +258,7 @@ const TestimonialVideo = () => {
             </div>
             
             {/* Stats Counters */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-6">
               {companyStats.map((stat, index) => (
                 <motion.div
                   key={stat.id}
@@ -266,42 +266,42 @@ const TestimonialVideo = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: stat.animationDelay }}
                   viewport={{ once: true }}
-                  className="bg-gray-900 rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 text-center relative overflow-hidden group border border-gray-700"
+                  className="bg-gray-900 rounded-lg p-4 shadow-md hover:shadow-lg transition-shadow duration-300 text-center relative overflow-hidden group border border-gray-700"
                 >
                   {/* Background circle decoration */}
                   <div 
-                    className="absolute -right-10 -top-10 w-40 h-40 rounded-full opacity-10 transition-all duration-500 group-hover:scale-125"
+                    className="absolute -right-8 -top-8 w-28 h-28 rounded-full opacity-10 transition-all duration-500 group-hover:scale-125"
                     style={{ backgroundColor: stat.color }}
                   />
                   
                   {/* Icon */}
-                  <div className="flex justify-center mb-4">
+                  <div className="flex justify-center mb-3">
                     <div 
-                      className="w-16 h-16 rounded-full flex items-center justify-center text-white text-2xl"
+                      className="w-12 h-12 rounded-full flex items-center justify-center text-white text-xl"
                       style={{ backgroundColor: stat.color }}
                     >
-                      <stat.icon size={28} />
+                      <stat.icon size={22} />
                     </div>
                   </div>
                   
                   {/* Counter */}
-                  <div className="mb-2 flex items-center justify-center">
-                    <h3 className="text-4xl font-bold" style={{ color: stat.color }}>
+                  <div className="mb-1 flex items-center justify-center">
+                    <h3 className="text-3xl font-bold" style={{ color: stat.color }}>
                       {stat.id === 3 || stat.id === 4 
                         ? animatedValues[index].toFixed(1) 
                         : Math.round(animatedValues[index])}
                     </h3>
-                    <span className="text-2xl font-bold ml-1" style={{ color: stat.color }}>
+                    <span className="text-xl font-bold ml-1" style={{ color: stat.color }}>
                       {stat.suffix}
                     </span>
                   </div>
                   
                   {/* Label */}
-                  <p className="text-gray-300 font-medium">{stat.label}</p>
+                  <p className="text-gray-300 font-medium text-sm">{stat.label}</p>
                   
                   {/* Description (if any) */}
                   {stat.description && (
-                    <p className="text-sm text-gray-400 mt-2">{stat.description}</p>
+                    <p className="text-xs text-gray-400 mt-1">{stat.description}</p>
                   )}
                   
                   {/* Animated border effect */}
@@ -324,7 +324,7 @@ const TestimonialVideo = () => {
             
             {/* CTA Button */}
             <motion.div 
-              className="mt-12 text-center"
+              className="mt-8 text-center"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.8 }}
@@ -332,12 +332,12 @@ const TestimonialVideo = () => {
             >
               <a 
                 href="/about" 
-                className="inline-flex items-center px-6 py-3 bg-[#9fc22f] text-black font-semibold rounded-full hover:bg-[#8db327] transition-colors shadow-lg hover:shadow-xl group"
+                className="inline-flex items-center px-5 py-2 bg-[#9fc22f] text-black font-semibold rounded-full hover:bg-[#8db327] transition-colors shadow-md hover:shadow-lg group text-sm"
               >
                 <span>Learn More About Us</span>
                 <svg 
                   xmlns="http://www.w3.org/2000/svg" 
-                  className="h-5 w-5 ml-2 transform transition-transform group-hover:translate-x-1" 
+                  className="h-4 w-4 ml-2 transform transition-transform group-hover:translate-x-1" 
                   fill="none" 
                   viewBox="0 0 24 24" 
                   stroke="currentColor"
