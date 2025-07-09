@@ -75,7 +75,7 @@ const CompanyCulture = () => {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-3xl sm:text-4xl font-bold mb-6 text-[#003e63]">
-                <span className="text-[#9fc22f]">BRAND</span> VISION & <span className="text-[#9fc22f]">STRATEGY</span>
+                <span className="text-[#9fc22f]">Brand Vision & Stratergy</span>
               </h2>
               
               <p className="text-gray-700 mb-6">
@@ -214,7 +214,7 @@ const CompanyCulture = () => {
             >
               <div className="h-48 overflow-hidden">
                 <img 
-                  src="https://images.unsplash.com/photo-1473773508845-188df298d2d1?auto=format&fit=crop&w=800&q=80" 
+                  src="/enviroment.jpeg" 
                   alt="Solar panels with city buildings" 
                   className="w-full h-full object-cover"
                 />
@@ -260,7 +260,7 @@ const CompanyCulture = () => {
             >
               <div className="h-48 overflow-hidden">
                 <img 
-                  src="https://images.unsplash.com/photo-1473773508845-188df298d2d1?auto=format&fit=crop&w=800&q=80" 
+                  src="/governence.jpeg" 
                   alt="Solar panels with city buildings" 
                   className="w-full h-full object-cover"
                 />

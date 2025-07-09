@@ -54,7 +54,7 @@ const SolarDesignSection = () => (
       {/* left column: full-height image on ≥lg */}
       <div className="hidden lg:block relative h-full">
         <img
-          src="/solar_design.png"
+          src="/planproject.jpg"
           alt="Engineer with solar panel"
           className="absolute inset-0 w-full h-full object-cover"
         />

@@ -84,7 +84,7 @@ const companyStats = [
     value: 10000,
     label: 'Successful Projects',
     icon: FaProjectDiagram,
-    color: '#003e63',
+    color: 'rgb(28 155 231)',
     suffix: '+',
     animationDelay: 0.2
   },
@@ -102,7 +102,7 @@ const companyStats = [
     value: 1.5,
     label: 'PV Modules Manufacturing Capacity',
     icon: FaBolt,
-    color: '#003e63',
+    color: 'rgb(28 155 231)',
     suffix: 'GW',
     description: '+2.5 GW Under Development',
     animationDelay: 0.6
@@ -234,7 +234,7 @@ const TestimonialVideo = () => {
                   viewport={{ once: true }}
                 >
                   <img 
-                    src="/back_Image.avif" 
+                    src="/Happyclientimage..jpg" 
                     alt="Solex Energy 30 Years" 
                     className="w-full h-auto rounded-lg shadow-md"
                   />

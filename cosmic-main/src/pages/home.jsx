@@ -2,16 +2,16 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import Hero from "../components/Hero";
-import SmartEnergySolutions from "../components/SmartEnergySolutions";
+// SmartEnergySolutions component removed
 import Portfolio from "../components/Portfolio";
 import SolarJourney from "../components/SolarJourney";
 import FaqSection from "../components/FaqSection";
-import CO2Section from "../components/CO2Section";
-import CO2Counter from "../components/CO2Counter";
+// CO2Section and CO2Counter imports removed
 import CompanyIntro from "../components/CompanyIntro";
 import VideoHero from "../components/VideoHero";
 import TimelineSection from "../components/TimelineSection";
 import TestimonialVideo from "../components/TestimonialVideo";
+import Marquee from "../components/Marquee";
 import { useAppContext } from "../context/AppContext";
 
 // Import necessary icons for static SolarJourney component
@@ -89,10 +89,83 @@ const Home = () => {
         {/* ---------- Hero ---------- */}
         <Hero />
 
-        {/* ---------- Smart Energy Solutions ---------- */}
+        {/* ---------- India Map Section ---------- */}
         <div className="mt-8 sm:mt-12 md:mt-16">
-          <SmartEnergySolutions />
+          <section className="w-full bg-white py-12 sm:py-16 md:py-20 relative overflow-hidden">
+            <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="text-center mb-10">
+                <motion.h2 
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5 }}
+                  viewport={{ once: true }}
+                  className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#003e63] mb-4 font-space-grotesk"
+                >
+                  Pan India Presence
+                </motion.h2>
+                <motion.p
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.2 }}
+                  viewport={{ once: true }}
+                  className="text-lg text-gray-600 max-w-3xl mx-auto"
+                >
+                  Our growing network spans across India, providing reliable solar solutions to homes and businesses nationwide.
+                </motion.p>
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                {/* Map Image */}
+                <motion.div
+                  initial={{ opacity: 0, x: -50 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.8, ease: "easeOut" }}
+                  viewport={{ once: true }}
+                  className="flex justify-center"
+                >
+                  <div className="relative">
+                    <img 
+                      src="/mapindea.png" 
+                      alt="Cosmic Energy India Presence Map" 
+                      className="w-full h-auto max-w-lg mx-auto shadow-lg rounded-lg"
+                    />
+                    <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-[#9fc22f] rounded-full opacity-20 blur-xl"></div>
+                    <div className="absolute -top-4 -left-4 w-32 h-32 bg-[#003e63] rounded-full opacity-10 blur-xl"></div>
+                  </div>
+                </motion.div>
+                
+                {/* Stats and Info */}
+                <motion.div
+                  initial={{ opacity: 0, x: 50 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+                  viewport={{ once: true }}
+                  className="space-y-6"
+                >
+                  {/* Stat 1 */}
+                  <div className="bg-gray-50 p-6 rounded-lg shadow-md border-l-4 border-[#003e63] hover:shadow-lg transition-shadow duration-300">
+                    <h3 className="text-xl font-bold text-[#003e63] mb-2 font-space-grotesk">25+ States</h3>
+                    <p className="text-gray-600">Serving customers across more than 25 states with dedicated local support teams.</p>
+                  </div>
+                  
+                  {/* Stat 2 */}
+                  <div className="bg-gray-50 p-6 rounded-lg shadow-md border-l-4 border-[#9fc22f] hover:shadow-lg transition-shadow duration-300">
+                    <h3 className="text-xl font-bold text-[#003e63] mb-2 font-space-grotesk">100+ Cities</h3>
+                    <p className="text-gray-600">Operating in over 100 cities with installation and maintenance capabilities.</p>
+                  </div>
+                  
+                  {/* Stat 3 */}
+                  <div className="bg-gray-50 p-6 rounded-lg shadow-md border-l-4 border-[#003e63] hover:shadow-lg transition-shadow duration-300">
+                    <h3 className="text-xl font-bold text-[#003e63] mb-2 font-space-grotesk">1000+ Projects</h3>
+                    <p className="text-gray-600">Successfully completed over 1000 solar installations of various scales nationwide.</p>
+                  </div>
+                </motion.div>
+              </div>
+            </div>
+          </section>
         </div>
+
+        {/* Smart Energy Solutions section removed */}
 
         {/* ---------- CompanyIntro ---------- */}
         <div className="mt-8 sm:mt-12 md:mt-16">
@@ -119,57 +192,31 @@ const Home = () => {
         </div>
 
        
-        {/* ---------- CO2Section ---------- */}
-        <div className="mt-8 sm:mt-12 md:mt-16">
-          {/* Static CO2Section */}
-          <section className="w-full bg-transparent py-8 sm:py-10 md:py-16">
-            <div className="max-w-screen-xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-6 sm:gap-8 items-center px-4 sm:px-6 md:px-6">
-              {/* Left Image Column */}
-              <div className="order-2 md:order-1 col-span-12 md:col-span-7 flex justify-center md:justify-start overflow-hidden">
-                <motion.div
-                  initial={{ opacity: 0, y: 50 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, ease: "easeOut" }}
-                  viewport={{ once: true, amount: 0.3 }}
-                  className="relative w-full h-full rounded-xl overflow-hidden"
-                >
-                  <motion.img
-                    src="/co2emission.png"
-                    alt="Solar Energy Solutions"
-                    className="w-full h-auto max-h-[400px] sm:max-h-[500px] md:max-h-[600px] rounded-xl object-cover"
-                    initial={{ scale: 1, x: 0 }}
-                    animate={{ 
-                      x: [0, -10, 10, -5, 5, 0],
-                      scale: [1, 1.02, 1, 1.01, 1]
-                    }}
-                    transition={{ 
-                      x: { duration: 12, repeat: Infinity, ease: "easeInOut" },
-                      scale: { duration: 8, repeat: Infinity, ease: "easeInOut" }
-                    }}
-                    whileHover={{ scale: 1.05 }}
-                  />
-                </motion.div>
-              </div>
-              {/* Right Content Column */}
-              <div className="order-1 md:order-2 col-span-12 md:col-span-5 px-4 md:px-0 mb-6 md:mb-0">
-                <motion.p 
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.2 }}
-                  viewport={{ once: true }}
-                  className="text-[1rem] sm:text-[1.1rem] md:text-[1.3rem] font-medium mb-2 flex items-center text-black font-space-grotesk">
-                  <span className="text-[0.7rem] sm:text-[0.8rem] mx-1">★</span>
-                  Intelligent Solution
-                  <span className="text-[0.7rem] sm:text-[0.8rem] mx-1">★</span>
-                </motion.p>
+        {/* CO2 Emission Reduction section removed */}
 
+        {/* ---------- Green Future Section ---------- */}
+        <div className="mt-8 sm:mt-12 md:mt-16">
+          <section className="w-full bg-gray-800 py-12 sm:py-16 md:py-20 relative overflow-hidden">
+            {/* Background overlay with gradient and solar panels */}
+            <div className="absolute inset-0 bg-gradient-to-r from-gray-900 to-gray-800 opacity-80"></div>
+            <div className="absolute inset-0 z-0">
+              <img 
+                src="/solar-panels.jpg" 
+                alt="Solar Panels Background" 
+                className="w-full h-full object-cover opacity-30"
+              />
+            </div>
+            
+            <div className="max-w-screen-xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-8 sm:gap-10 items-center px-4 sm:px-6 md:px-6 relative z-10">
+              {/* Left Content Column */}
+              <div className="order-2 md:order-1 col-span-12 md:col-span-5 px-4 md:px-0 mb-8 md:mb-0">
                 <motion.h2 
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.3 }}
                   viewport={{ once: true }}
-                  className="text-[1.8rem] sm:text-[2.2rem] md:text-[3.5rem] font-bold text-black leading-tight sm:leading-snug mb-3 sm:mb-4 font-space-grotesk">
-                  CO2 Emission Reduction
+                  className="text-[1.8rem] sm:text-[2.2rem] md:text-[3.5rem] font-bold text-white leading-tight sm:leading-snug mb-4 sm:mb-5 font-space-grotesk">
+                  ENABLING<br />A GREEN FUTURE
                 </motion.h2>
 
                 <motion.p 
@@ -177,8 +224,8 @@ const Home = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.4 }}
                   viewport={{ once: true }}
-                  className="text-[0.9rem] sm:text-[1rem] md:text-[1.1rem] leading-relaxed text-black mb-5 sm:mb-6">
-                  Transform Your Energy Use – Reduce CO₂, Restore Nature. Our solar solutions help reduce carbon footprint and contribute to a cleaner environment.
+                  className="text-[0.9rem] sm:text-[1rem] md:text-[1.1rem] leading-relaxed text-gray-300 mb-6 sm:mb-8">
+                  Creating climate for change through thought leadership and raising awareness towards solar industry, aiding in realization of Aatmanirbhar and energy-rich India.
                 </motion.p>
 
                 <motion.button 
@@ -187,15 +234,41 @@ const Home = () => {
                   transition={{ duration: 0.5, delay: 0.5 }}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="inline-flex items-center gap-1 sm:gap-2 px-5 py-2.5 sm:px-6 md:px-8 sm:py-3 rounded-full bg-[#9fc22f] hover:bg-[#8db327] text-black font-semibold text-[0.9rem] sm:text-[1rem] md:text-[1.1rem] transition-shadow shadow-md">
-                  Discover Solar
-                  <motion.div
-                    animate={{ x: [0, 5, 0] }}
-                    transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-                  >
-                    <ArrowRightIcon className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" />
-                  </motion.div>
+                  className="inline-flex items-center gap-1 sm:gap-2 px-6 py-3 sm:px-8 md:px-10 sm:py-3.5 rounded-full bg-white hover:bg-gray-200 text-black font-semibold text-[0.9rem] sm:text-[1rem] md:text-[1.1rem] transition-all duration-300 shadow-lg">
+                  LEARN MORE
                 </motion.button>
+              </div>
+              
+              {/* Right Image Column */}
+              <div className="order-1 md:order-2 col-span-12 md:col-span-7 flex justify-center md:justify-end overflow-hidden">
+                <motion.div
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, ease: "easeOut" }}
+                  viewport={{ once: true, amount: 0.3 }}
+                  className="relative w-full h-full"
+                >
+                  <div className="relative w-full h-full flex items-center justify-center">
+                    {/* Newspaper/Magazine style image */}
+                    <div className="relative w-full max-w-lg bg-primary-600 rounded-lg shadow-2xl overflow-hidden transform rotate-1 hover:rotate-0 transition-transform duration-300 border-2 border-accent-500">
+                      {/* Newspaper image */}
+                      <div className="p-2 bg-primary-600">
+                        <div className="border-b-2 border-accent-500 pb-2 mb-2">
+                          <h3 className="text-white text-2xl font-bold text-center font-space-grotesk">THE SOLAR TIMES</h3>
+                        </div>
+                        <img 
+                          src="/newsimage.jpeg" 
+                          alt="Solar Times Newspaper" 
+                          className="w-full h-auto rounded"
+                        />
+                      </div>
+                    </div>
+                    
+                    {/* Decorative elements */}
+                    <div className="absolute top-10 right-10 w-20 h-20 bg-accent-500 rounded-full opacity-20 blur-xl"></div>
+                    <div className="absolute bottom-10 left-10 w-32 h-32 bg-primary-500 rounded-full opacity-10 blur-xl"></div>
+                  </div>
+                </motion.div>
               </div>
             </div>
           </section>
@@ -228,7 +301,7 @@ const Home = () => {
                   src="/arrow.svg"
                   alt="Arrow"
                   style={{ animationDelay: '0.3s' }}
-                  className="absolute right-[-20%] top-[30%] z-10 hidden h-[60px] w-[60px] -translate-y-1/2 transform-gpu animate-arrow animate-color-gradient sm:block lg:h-[80px] lg:w-[80px] lg:right-[-26%]"
+                  className="absolute left-[87%] top-[20%] z-10 hidden h-[60px] w-[60px] -translate-x-1/2 -translate-y-1/2 transform-gpu animate-arrow animate-color-gradient sm:block lg:h-[80px] lg:w-[80px]"
                 />
 
                 {/* image circle */}
@@ -270,7 +343,7 @@ const Home = () => {
                   src="/arrow.svg"
                   alt="Arrow"
                   style={{ animationDelay: '0.5s' }}
-                  className="absolute right-[-20%] top-[30%] z-10 hidden h-[60px] w-[60px] -translate-y-1/2 transform-gpu animate-arrow animate-color-gradient sm:block lg:h-[80px] lg:w-[80px] lg:right-[-26%]"
+                  className="absolute left-[87%] top-[20%] z-10 hidden h-[60px] w-[60px] -translate-x-1/2 -translate-y-1/2 transform-gpu animate-arrow animate-color-gradient sm:block lg:h-[80px] lg:w-[80px]"
                 />
 
                 {/* image circle */}
@@ -312,7 +385,7 @@ const Home = () => {
                   src="/arrow.svg"
                   alt="Arrow"
                   style={{ animationDelay: '0.7s' }}
-                  className="absolute right-[-20%] top-[30%] z-10 hidden h-[60px] w-[60px] -translate-y-1/2 transform-gpu animate-arrow animate-color-gradient sm:block lg:h-[80px] lg:w-[80px] lg:right-[-26%]"
+                  className="absolute left-[87%] top-[20%] z-10 hidden h-[60px] w-[60px] -translate-x-1/2 -translate-y-1/2 transform-gpu animate-arrow animate-color-gradient sm:block lg:h-[80px] lg:w-[80px]"
                 />
 
                 {/* image circle */}
@@ -430,53 +503,40 @@ const Home = () => {
         
 
         {/* ---------- Solar Solutions ---------- */}
-        <section className="w-full bg-white py-12 sm:py-16 md:py-20 mt-8 sm:mt-12 md:mt-16">
+      
+        
+        {/* ---------- Marquee Section ---------- */}
+        <section className="w-full bg-white py-12 mt-8 sm:mt-12 md:mt-16 overflow-hidden">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="mb-8 sm:mb-12 md:mb-16 text-center">
+            <div className="mb-8 text-center">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#003e63] mb-4 font-space-grotesk">Our Clients</h2>
+              <p className="text-gray-600 max-w-2xl mx-auto">We collaborate with industry leaders to bring you the most advanced solar solutions.</p>
             </div>
-
-            {/* <div className="grid grid-cols-1 gap-6 sm:gap-8 md:grid-cols-2 lg:grid-cols-3">
-              {solutions.map((s) => (
-                <div
-                  key={s.title}
-                  className="group relative h-80 sm:h-96 overflow-hidden rounded-2xl shadow-lg transition hover:scale-105"
-                >
-                  <div className="absolute inset-0 z-10 bg-gradient-to-t from-black to-transparent opacity-70" />
-                  <img
-                    src={s.image}
-                    alt={s.title}
-                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
-                  />
-                  <div className="absolute bottom-0 left-0 right-0 z-20 p-4 sm:p-6">
-                    <h3 className="mb-2 text-xl sm:text-2xl font-bold text-white">
-                      {s.title}
-                    </h3>
-                    <p className="mb-3 sm:mb-4 text-yellow-green-100 opacity-90 text-sm sm:text-base">
-                      {s.description}
-                    </p>
-                    <Link
-                      to={s.link}
-                      className="inline-flex items-center rounded-full bg-yellow-green-400 px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm font-medium text-yellow-green-950 transition hover:bg-yellow-green-500"
-                    >
-                      Learn more
-                      <svg
-                        className="ml-1.5 sm:ml-2 h-3 w-3 sm:h-4 sm:w-4"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth={2}
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M17 8l4 4m0 0l-4 4m4-4H3"
-                        />
-                      </svg>
-                    </Link>
-                  </div>
+            
+            <div className="py-4">
+              <Marquee className="py-4" pauseOnHover={true}>
+                <div className="flex flex-col items-center justify-center mx-4 h-48 w-64 bg-white px-6 py-8 rounded-xl border border-gray-200 hover:border-[#003e63] transition-all duration-300 shadow-md">
+                  <img src="/kia.png" alt="Kia Motors Logo" className="h-16 w-auto mb-4" />
+                  <span className="text-[#003e63] font-semibold text-lg">Kia Motors</span>
                 </div>
-              ))}
-            </div> */}
+                <div className="flex flex-col items-center justify-center mx-4 h-48 w-64 bg-white px-6 py-8 rounded-xl border border-gray-200 hover:border-[#003e63] transition-all duration-300 shadow-md">
+                  <img src="/mahavir.webp" alt="Mahavir Hospital Logo" className="h-16 w-auto mb-4" />
+                  <span className="text-[#003e63] font-semibold text-lg">Mahavir Hospital</span>
+                </div>
+                <div className="flex flex-col items-center justify-center mx-4 h-48 w-64 bg-white px-6 py-8 rounded-xl border border-gray-200 hover:border-[#003e63] transition-all duration-300 shadow-md">
+                  <img src="/bharatpetrlium1.jpg" alt="Bharat Petroleum Logo" className="h-16 w-auto mb-4" />
+                  <span className="text-[#003e63] font-semibold text-lg">Bharat Petroleum</span>
+                </div>
+                <div className="flex flex-col items-center justify-center mx-4 h-48 w-64 bg-white px-6 py-8 rounded-xl border border-gray-200 hover:border-[#003e63] transition-all duration-300 shadow-md">
+                  <img src="/logo.png" alt="Kabeer Taxation Logo" className="h-16 w-auto mb-4" />
+                  <span className="text-[#003e63] font-semibold text-lg">Kabeer Taxation</span>
+                </div>
+                <div className="flex flex-col items-center justify-center mx-4 h-48 w-64 bg-white px-6 py-8 rounded-xl border border-gray-200 hover:border-[#003e63] transition-all duration-300 shadow-md">
+                  <img src="/logo.png" alt="Bhageerath Logo" className="h-16 w-auto mb-4" />
+                  <span className="text-[#003e63] font-semibold text-lg">Bhageerath</span>
+                </div>
+              </Marquee>
+            </div>
           </div>
         </section>
       </div>

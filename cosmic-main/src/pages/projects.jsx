@@ -65,13 +65,36 @@ const AccordionItem = ({ title, children }) => {
 };
 
 const ProjectsPage = () => {
-  const { projects, loading, fetchProjects } = useAppContext();
+  const { projects, fetchProjects } = useAppContext();
+  // Removed loading state to prevent lazy loading
+  const loading = false;
   const [projectData, setProjectData] = useState([]);
   const [galleryData, setGalleryData] = useState([]);
 
   useEffect(() => {
     // Fetch projects from backend
     fetchProjects();
+    
+    // Set fallback data immediately to ensure projects are visible
+    const fallbackData = fallbackProjectImages.map((src, idx) => ({
+      _id: `fallback-${idx}`,
+      title: `Solar Project ${idx + 1}`,
+      description: `A ${idx % 2 === 0 ? 'residential' : 'commercial'} solar installation with ${(idx + 1) * 5} kW capacity.`,
+      category: idx % 2 === 0 ? 'Residential' : 'Commercial',
+      featuredImage: src,
+      location: "Gujarat, India"
+    }));
+    
+    setProjectData(fallbackData);
+    
+    // Set fallback gallery data
+    const fallbackGallery = galleryImages.map((image, idx) => ({
+      image: image,
+      title: `Project ${idx + 1}`,
+      category: idx % 2 === 0 ? 'Residential' : 'Commercial'
+    }));
+    
+    setGalleryData(fallbackGallery);
   }, []);
 
   useEffect(() => {
