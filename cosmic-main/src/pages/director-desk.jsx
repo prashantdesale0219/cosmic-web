@@ -188,11 +188,11 @@ const DirectorDesk = () => {
               >
                 {/* Director Image - Prominent */}
                 <div className={`relative w-full md:w-1/3 ${index % 2 !== 0 ? 'md:order-2' : ''}`}>
-                  <div className="relative overflow-hidden rounded-lg shadow-xl">
+                  <div className="relative overflow-hidden rounded-lg shadow-xl h-[550px]" >
                     <img
                       src={director.image}
                       alt={director.name}
-                      className="w-full h-auto object-cover transition-transform duration-500 hover:scale-105"
+                      className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
                     />
                     <div className="absolute top-0 right-0 bg-accent-500 p-2 rounded-bl-lg">
                       <img
@@ -210,11 +210,12 @@ const DirectorDesk = () => {
                   <p className="text-accent-500 font-semibold text-lg mb-4">{director.position}</p>
                   
                   {/* Short Message Preview - Larger size with better styling */}
-                  <div className="bg-gray-50 p-5 rounded-lg border-l-4 border-accent-500 mb-6 shadow-sm relative">
+                  <div className="bg-gray-50 p-5 rounded-lg border-l-4 border-accent-500 mb-6 shadow-sm relative min-h-[200px]">
                     <FaQuoteLeft className="text-accent-500/30 text-4xl absolute top-3 left-3" />
-                    <p className="text-gray-700 leading-relaxed text-base italic pl-8 pt-2">
-                      {director.message.split('\n\n')[0]}
+                    <p className="text-gray-700 leading-relaxed text-base italic pl-8 pt-2 whitespace-pre-line">
+                      {director.message.split('\n').slice(0, 6).join('\n')}
                     </p>
+                    <FaQuoteRight className="text-accent-500/30 text-2xl absolute bottom-3 right-3" />
                   </div>
                    
                   <div className={`flex ${index % 2 !== 0 ? 'justify-end' : 'justify-start'} gap-4`}>

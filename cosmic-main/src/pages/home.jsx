@@ -249,20 +249,37 @@ const Home = () => {
                   className="relative w-full h-full"
                 >
                   <div className="relative w-full h-full flex items-center justify-center">
-                    {/* Newspaper/Magazine style image */}
-                    <div className="relative w-full max-w-lg bg-primary-600 rounded-lg shadow-2xl overflow-hidden transform rotate-1 hover:rotate-0 transition-transform duration-300 border-2 border-accent-500">
-                      {/* Newspaper image */}
-                      <div className="p-2 bg-primary-600">
-                        <div className="border-b-2 border-accent-500 pb-2 mb-2">
-                          <h3 className="text-white text-2xl font-bold text-center font-space-grotesk">THE SOLAR TIMES</h3>
-                        </div>
-                        <img 
-                          src="/newsimage.jpeg" 
-                          alt="Solar Times Newspaper" 
-                          className="w-full h-auto rounded"
-                        />
-                      </div>
-                    </div>
+                    {/* Newspaper/Magazine style image with animation */}
+                    <motion.div 
+                      className="relative w-full max-w-lg overflow-hidden rounded-lg shadow-2xl"
+                      initial={{ rotate: 5, scale: 0.95 }}
+                      whileInView={{ rotate: 0, scale: 1 }}
+                      transition={{ duration: 0.6, ease: "easeOut" }}
+                      whileHover={{ 
+                        scale: 1.05,
+                        boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
+                        transition: { duration: 0.3 }
+                      }}
+                    >
+                      <motion.img 
+                        src="/newsimage.png" 
+                        alt="Solar News" 
+                        className="w-full h-auto rounded"
+                        initial={{ filter: "brightness(0.9)" }}
+                        whileHover={{ 
+                          filter: "brightness(1.1)",
+                          transition: { duration: 0.3 }
+                        }}
+                        animate={{
+                          scale: [1, 1.02, 1],
+                        }}
+                        transition={{
+                          repeat: Infinity,
+                          repeatType: "reverse",
+                          duration: 2,
+                        }}
+                      />
+                    </motion.div>
                     
                     {/* Decorative elements */}
                     <div className="absolute top-10 right-10 w-20 h-20 bg-accent-500 rounded-full opacity-20 blur-xl"></div>

@@ -100,10 +100,14 @@ const CompanyCulture = () => {
             </div>
             
             <div className="relative">
-              <img 
-                src="/public/co2emission.png" 
-                alt="Earth with green energy" 
+              <video 
+                src="/company-culture.mp4" 
+                alt="Company Culture Video" 
                 className="rounded-lg shadow-lg w-full h-auto"
+                autoPlay
+                loop
+                muted
+                playsInline
               />
             </div>
           </div>

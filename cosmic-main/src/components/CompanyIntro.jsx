@@ -36,7 +36,7 @@ export default function CompanyIntro() {
           variants={fadeUpVariant}
           className="text-[#cae28e] text-base md:text-lg font-semibold border-l-4 border-[#cae28e] pl-3 mb-4 font-space-grotesk"
         >
-          The Company
+          The Cosmic Powertech
         </motion.p>
 
         <motion.h1

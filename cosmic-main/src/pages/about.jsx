@@ -103,6 +103,23 @@ const About = () => {
             <div className="h-1 w-24 bg-accent-500 mx-auto rounded-full mt-4"></div>
           </motion.header>
           {/* Our Expertise Grid Section */}
+
+          <motion.header
+            variants={fadeUpVariant}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="mb-16 text-center"
+          >
+            <h2 className="text-3xl sm:text-4xl font-bold text-primary-700 mb-4">
+             Our Expertise
+            </h2>
+            <p>
+              We are hands down our expertise in product distributorship.
+            </p>
+
+            <div className="h-1 w-24 bg-accent-500 mx-auto rounded-full mt-4"></div>
+          </motion.header>
           <motion.div
             variants={fadeUpVariant}
             initial="hidden"
@@ -110,107 +127,344 @@ const About = () => {
             viewport={{ once: true }}
             className="mb-16"
           >
-            <h3 className="text-2xl font-bold text-center text-primary-700 mb-8">
-              Our Expertise
-            </h3>
-            <p className="text-gray-600 max-w-3xl mx-auto text-center mb-10">
-              We are hands down our expertise in product distributorship.
-            </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {/* Card 1 - Solar Solutions */}
-              <div className="rounded-xl overflow-hidden shadow-lg border border-gray-100 transition-all duration-300 hover:shadow-xl hover:scale-[1.02] group aspect-square">
-                <div className="relative h-full w-full overflow-hidden">
-                  <img
-                    src="/solar-panels.jpg"
-                    alt="Solar Solutions"
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
-                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
-                    <h4 className="text-white font-bold text-lg">
-                      Solar Solutions
-                    </h4>
-                  </div>
-                </div>
-              </div>
-
-              {/* Card 2 - Motors and Gearboxes */}
-              <div className="rounded-xl overflow-hidden shadow-lg border border-gray-100 transition-all duration-300 hover:shadow-xl hover:scale-[1.02] group aspect-square">
-                <div className="relative h-full w-full overflow-hidden">
-                  <img
-                    src="/installation.jpg"
-                    alt="Motors and Gearboxes"
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
-                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
-                    <h4 className="text-white font-bold text-lg">
-                      Motors and Gearboxes
-                    </h4>
-                  </div>
-                </div>
-              </div>
-
-              {/* Card 3 - Switchgear */}
-              <div className="rounded-xl overflow-hidden shadow-lg border border-gray-100 transition-all duration-300 hover:shadow-xl hover:scale-[1.02] group aspect-square">
-                <div className="relative h-full w-full overflow-hidden">
-                  <img
-                    src="/quality-assurance.jpg"
-                    alt="Switchgear"
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
-                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
-                    <h4 className="text-white font-bold text-lg">Switchgear</h4>
-                  </div>
-                </div>
-              </div>
-
-              {/* Card 4 - Cables */}
-              <div className="rounded-xl overflow-hidden shadow-lg border border-gray-100 transition-all duration-300 hover:shadow-xl hover:scale-[1.02] group aspect-square">
-                <div className="relative h-full w-full overflow-hidden">
-                  <img
-                    src="/site-assessment.jpg"
-                    alt="Cables"
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
-                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
-                    <h4 className="text-white font-bold text-lg">Cables</h4>
-                  </div>
-                </div>
-              </div>
-
-              {/* Card 5 - Industrial Categories */}
-              <div className="rounded-xl overflow-hidden shadow-lg border border-gray-100 transition-all duration-300 hover:shadow-xl hover:scale-[1.02] group aspect-square">
+              {/* Card 1 - Textiles */}
+              <div className="rounded-xl overflow-hidden shadow-lg border border-gray-100 transition-all duration-300 hover:shadow-xl hover:scale-[1.02] h-52">
                 <div className="relative h-full w-full overflow-hidden">
                   <img
                     src="/back_Image.avif"
-                    alt="Industrial Categories"
+                    alt="Textiles Industry"
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                   <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
                     <h4 className="text-white font-bold text-lg">
-                      Industrial Categories
+                      Textiles  
                     </h4>
                   </div>
                 </div>
               </div>
 
-              {/* Card 6 - Energy Solutions */}
-              <div className="rounded-xl overflow-hidden shadow-lg border border-gray-100 transition-all duration-300 hover:shadow-xl hover:scale-[1.02] group aspect-square">
+              {/* Card 2 - Paper Packaging */}
+              <div className="rounded-xl overflow-hidden shadow-lg border border-gray-100 transition-all duration-300 hover:shadow-xl hover:scale-[1.02] group h-52">
                 <div className="relative h-full w-full overflow-hidden">
                   <img
-                    src="/newsimage.jpeg"
-                    alt="Energy Solutions"
+                    src="/back_Image.avif"
+                    alt="Paper Packaging Industry"
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                   <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
                     <h4 className="text-white font-bold text-lg">
-                      Energy Solutions
+                      Paper Packaging
+                    </h4>
+                  </div>
+                </div>
+              </div>
+
+              {/* Card 3 - Hospital */}
+              <div className="rounded-xl overflow-hidden shadow-lg border border-gray-100 transition-all duration-300 hover:shadow-xl hover:scale-[1.02] h-52">
+                <div className="relative h-full w-full overflow-hidden">
+                  <img
+                    src="/back_Image.avif"
+                    alt="Hospital Industry"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+                    <h4 className="text-white font-bold text-lg">Hospital</h4>
+                  </div>
+                </div>
+              </div>
+
+              {/* Card 4 - Automobile */}
+              <div className="rounded-xl overflow-hidden shadow-lg border border-gray-100 transition-all duration-300 hover:shadow-xl hover:scale-[1.02] h-52">
+                <div className="relative h-full w-full overflow-hidden">
+                  <img
+                    src="/back_Image.avif"
+                    alt="Automobile Industry"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+                    <h4 className="text-white font-bold text-lg">Automobile</h4>
+                  </div>
+                </div>
+              </div>
+
+              {/* Card 5 - Banking */}
+              <div className="rounded-xl overflow-hidden shadow-lg border border-gray-100 transition-all duration-300 hover:shadow-xl hover:scale-[1.02] h-52">
+                <div className="relative h-full w-full overflow-hidden">
+                  <img
+                    src="/back_Image.avif"
+                    alt="Banking Industry"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+                    <h4 className="text-white font-bold text-lg">
+                      Banking
+                    </h4>
+                  </div>
+                </div>
+              </div>
+
+              {/* Card 6 - Chemicals */}
+              <div className="rounded-xl overflow-hidden shadow-lg border border-gray-100 transition-all duration-300 hover:shadow-xl hover:scale-[1.02] h-52">
+                <div className="relative h-full w-full overflow-hidden">
+                  <img
+                    src="/back_Image.avif"
+                    alt="Chemicals Industry"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+                    <h4 className="text-white font-bold text-lg">
+                      Chemicals
+                    </h4>
+                  </div>
+                </div>
+              </div>
+
+              {/* Card 7 - Diary Industry */}
+              <div className="rounded-xl overflow-hidden shadow-lg border border-gray-100 transition-all duration-300 hover:shadow-xl hover:scale-[1.02] h-52">
+                <div className="relative h-full w-full overflow-hidden">
+                  <img
+                    src="/back_Image.avif"
+                    alt="Diary Industry"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+                    <h4 className="text-white font-bold text-lg">
+                      Diary Industry
+                    </h4>
+                  </div>
+                </div>
+              </div>
+
+              {/* Card 8 - Agriculture */}
+              <div className="rounded-xl overflow-hidden shadow-lg border border-gray-100 transition-all duration-300 hover:shadow-xl hover:scale-[1.02] h-52">
+                <div className="relative h-full w-full overflow-hidden">
+                  <img
+                    src="/back_Image.avif"
+                    alt="Agriculture Industry"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+                    <h4 className="text-white font-bold text-lg">
+                      Agriculture
+                    </h4>
+                  </div>
+                </div>
+              </div>
+
+              {/* Card 9 - Education */}
+              <div className="rounded-xl overflow-hidden shadow-lg border border-gray-100 transition-all duration-300 hover:shadow-xl hover:scale-[1.02] h-52">
+                <div className="relative h-full w-full overflow-hidden">
+                  <img
+                    src="/back_Image.avif"
+                    alt="Education Industry"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+                    <h4 className="text-white font-bold text-lg">Education</h4>
+                  </div>
+                </div>
+              </div>
+
+              {/* Card 10 - FMCG */}
+              <div className="rounded-xl overflow-hidden shadow-lg border border-gray-100 transition-all duration-300 hover:shadow-xl hover:scale-[1.02] h-52">
+                <div className="relative h-full w-full overflow-hidden">
+                  <img
+                    src="/back_Image.avif"
+                    alt="FMCG Industry"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+                    <h4 className="text-white font-bold text-lg">FMCG</h4>
+                  </div>
+                </div>
+              </div>
+
+              {/* Card 11 - Oil and Gas */}
+              <div className="rounded-xl overflow-hidden shadow-lg border border-gray-100 transition-all duration-300 hover:shadow-xl hover:scale-[1.02] h-52">
+                <div className="relative h-full w-full overflow-hidden">
+                  <img
+                    src="/back_Image.avif"
+                    alt="Oil and Gas Industry"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+                    <h4 className="text-white font-bold text-lg">
+                      Oil and Gas
+                    </h4>
+                  </div>
+                </div>
+              </div>
+
+              {/* Card 12 - Mining Industry */}
+              <div className="rounded-xl overflow-hidden shadow-lg border border-gray-100 transition-all duration-300 hover:shadow-xl hover:scale-[1.02] h-52">
+                <div className="relative h-full w-full overflow-hidden">
+                  <img
+                    src="/back_Image.avif"
+                    alt="Mining Industry"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+                    <h4 className="text-white font-bold text-lg">
+                      Mining Industry
+                    </h4>
+                  </div>
+                </div>
+              </div>
+
+              {/* Card 13 - Tourism */}
+              <div className="rounded-xl overflow-hidden shadow-lg border border-gray-100 transition-all duration-300 hover:shadow-xl hover:scale-[1.02] h-52">
+                <div className="relative h-full w-full overflow-hidden">
+                  <img
+                    src="/back_Image.avif"
+                    alt="Tourism Industry"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+                    <h4 className="text-white font-bold text-lg">
+                      Tourism
+                    </h4>
+                  </div>
+                </div>
+              </div>
+
+              {/* Card 14 - Private and Government Sector */}
+              <div className="rounded-xl overflow-hidden shadow-lg border border-gray-100 transition-all duration-300 hover:shadow-xl hover:scale-[1.02] h-52">
+                <div className="relative h-full w-full overflow-hidden">
+                  <img
+                    src="/back_Image.avif"
+                    alt="Private and Government Sector"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+                    <h4 className="text-white font-bold text-lg">
+                      Private and Government Sector
+                    </h4>
+                  </div>
+                </div>
+              </div>
+
+              {/* Card 15 - Pharmaceuticals */}
+              <div className="rounded-xl overflow-hidden shadow-lg border border-gray-100 transition-all duration-300 hover:shadow-xl hover:scale-[1.02] h-52">
+                <div className="relative h-full w-full overflow-hidden">
+                  <img
+                    src="/back_Image.avif"
+                    alt="Pharmaceuticals Industry"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+                    <h4 className="text-white font-bold text-lg">Pharmaceuticals</h4>
+                  </div>
+                </div>
+              </div>
+
+              {/* Card 16 - IT */}
+              <div className="rounded-xl overflow-hidden shadow-lg border border-gray-100 transition-all duration-300 hover:shadow-xl hover:scale-[1.02] h-52">
+                <div className="relative h-full w-full overflow-hidden">
+                  <img
+                    src="/back_Image.avif"
+                    alt="IT Industry"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+                    <h4 className="text-white font-bold text-lg">IT</h4>
+                  </div>
+                </div>
+              </div>
+
+              {/* Card 17 - Gems and Jewellery */}
+              <div className="rounded-xl overflow-hidden shadow-lg border border-gray-100 transition-all duration-300 hover:shadow-xl hover:scale-[1.02] h-52">
+                <div className="relative h-full w-full overflow-hidden">
+                  <img
+                    src="/back_Image.avif"
+                    alt="Gems and Jewellery Industry"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+                    <h4 className="text-white font-bold text-lg">
+                      Gems and Jewellery
                     </h4>
                   </div>
                 </div>
               </div>
             </div>
           </motion.div>
+        </div>
+      </motion.section>
+
+      {/* Why Choose Cosmic? Section */}
+      <motion.section
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        variants={fadeUpVariant}
+        className="bg-gray-50 py-16 px-4 sm:px-6 lg:px-8"
+      >
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl sm:text-4xl font-bold text-primary-700">
+              Why Choose <span className="text-accent-500">Cosmic</span>?
+            </h2>
+            <div className="h-1 w-24 bg-accent-500 mx-auto rounded-full mt-4"></div>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 text-center">
+            {/* Nationwide Reach */}
+            <div className="flex flex-col items-center p-4">
+              <div className="bg-white p-4 rounded-full shadow-md mb-4 w-20 h-20 flex items-center justify-center text-accent-500">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+                </svg>
+              </div>
+              <h3 className="text-lg font-bold text-primary-700 mb-2">Nationwide Reach</h3>
+              <p className="text-gray-600 text-sm">A vast network across 100+ cities.</p>
+            </div>
+            
+            {/* Diverse Portfolio */}
+            <div className="flex flex-col items-center p-4">
+              <div className="bg-white p-4 rounded-full shadow-md mb-4 w-20 h-20 flex items-center justify-center text-accent-500">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                </svg>
+              </div>
+              <h3 className="text-lg font-bold text-primary-700 mb-2">Diverse Portfolio</h3>
+              <p className="text-gray-600 text-sm">Products spanning 40+ categories.</p>
+            </div>
+            
+            {/* Expert Team */}
+            <div className="flex flex-col items-center p-4">
+              <div className="bg-white p-4 rounded-full shadow-md mb-4 w-20 h-20 flex items-center justify-center text-accent-500">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                </svg>
+              </div>
+              <h3 className="text-lg font-bold text-primary-700 mb-2">Expert Team</h3>
+              <p className="text-gray-600 text-sm">A workforce of 1,000+ professionals dedicated to your success.</p>
+            </div>
+            
+            {/* Customer Focus */}
+            <div className="flex flex-col items-center p-4">
+              <div className="bg-white p-4 rounded-full shadow-md mb-4 w-20 h-20 flex items-center justify-center text-accent-500">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+              </div>
+              <h3 className="text-lg font-bold text-primary-700 mb-2">Customer Focus</h3>
+              <p className="text-gray-600 text-sm">Tailored solutions for every industry segment.</p>
+            </div>
+            
+            {/* Quality Assurance */}
+            <div className="flex flex-col items-center p-4">
+              <div className="bg-white p-4 rounded-full shadow-md mb-4 w-20 h-20 flex items-center justify-center text-accent-500">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                </svg>
+              </div>
+              <h3 className="text-lg font-bold text-primary-700 mb-2">Quality Assurance</h3>
+              <p className="text-gray-600 text-sm">We never compromise on the quality of products and services we offer.</p>
+            </div>
+          </div>
         </div>
       </motion.section>
 

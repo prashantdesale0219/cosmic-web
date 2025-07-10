@@ -26,9 +26,9 @@ const ArrowIcon = () => (
 
 /* bullets list reused for both columns */
 const bullets = [
-  "Cut Down On Delivery Expenses",
-  "Down On Delivery Expenses",
-  "Venenatis Lacinia Aliquet Finibus",
+  "Maximize Energy Production",
+  "Reduce Electricity Bills",
+  "Custom Design for Your Property",
 ];
 
 const SolarDesignSection = () => (
@@ -65,23 +65,20 @@ const SolarDesignSection = () => (
         {/* header */}
         <div className="space-y-4">
           <p className="font-semibold uppercase tracking-wider text-gray-700 inline-block relative before:content-['—'] before:mr-2 after:content-['—'] after:ml-2">
-            Solar Projects Planning
+            Professional Solar Solutions
           </p>
           <h2 className="text-4xl sm:text-5xl font-extrabold">
             Solar System Design
           </h2>
           <p className="text-gray-600 max-w-xl mx-auto lg:mx-0">
-            Hendrerit natoque senectus metus volutpat maecenas; nunc augue
-            himenaeos. Torquent vitae inceptos commodo proin augue sapien
-            consectetur facilisi.
+            Our expert team designs customized solar power systems that maximize energy production while minimizing costs. We analyze your energy needs, roof structure, and local climate conditions to create the most efficient solar solution for your property.
           </p>
         </div>
 
         {/* features: 2 columns on ≥sm */}
         <div className="grid sm:grid-cols-2 gap-10">
           {[
-            { icon: <ReturnIcon />, title: "Easy Return" },
-            { icon: <AwardIcon />, title: "Best Award" },
+            { icon: <AwardIcon />, title: "Expert Design" },
           ].map(({ icon, title }) => (
             <div key={title}>
               <div className="flex items-center gap-3 mb-4 justify-center sm:justify-start">
@@ -102,7 +99,7 @@ const SolarDesignSection = () => (
                 to="#"
                 className="inline-flex items-center gap-2 text-lg font-semibold mt-8 group"
               >
-                Get Started
+                Design Your System
                 <span className="flex items-center justify-center w-9 h-9 rounded-full bg-black text-white group-hover:bg-gray-800 transition">
                   <ArrowIcon />
                 </span>

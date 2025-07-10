@@ -10,50 +10,42 @@ export default function Portfolio() {
   // Fallback items if API fails
   const fallbackItems = [
     {
-      tag: "EPC",
-      title: "Enterprise Solar Solutions",
+      title: "EPC",
       img: "https://zolar.wpengine.com/wp-content/uploads/2024/07/portfolio-detail-1-01.jpg",
       span: "lg:col-span-3",
     },
     {
-      tag: "Retailer",
-      title: "Commercial Distribution",
+      title: "Retailer",
       img: "https://zolar.wpengine.com/wp-content/uploads/2024/07/portfolio-detail-2-01.jpg",
       span: "lg:col-span-3",
     },
     {
-      tag: "Solar Installer",
-      title: "Professional Installation",
+      title: "Solar Installer",
       img: "https://zolar.wpengine.com/wp-content/uploads/2024/07/portfolio-detail-2-02.jpg",
       span: "lg:col-span-3",
     },
     {
-      tag: "Floating",
-      title: "Water-Based Solar Arrays",
+      title: "Floating",
       img: "https://zolar.wpengine.com/wp-content/uploads/2024/07/portfolio-detail-1-02.jpg",
       span: "lg:col-span-3",
     },
     {
-      tag: "CLI",
-      title: "Command Line Solutions",
+      title: "CLI",
       img: "https://zolar.wpengine.com/wp-content/uploads/2024/07/portfolio-detail-1-01.jpg",
       span: "lg:col-span-3",
     },
     {
-      tag: "Rooftop",
-      title: "Commercial Rooftop Systems",
+      title: "Rooftop",
       img: "https://zolar.wpengine.com/wp-content/uploads/2024/07/portfolio-detail-2-01.jpg",
       span: "lg:col-span-3",
     },
     {
-      tag: "Residential Rooftop",
-      title: "Home Solar Solutions",
+      title: "Residential Rooftop",
       img: "https://zolar.wpengine.com/wp-content/uploads/2024/07/portfolio-detail-1-02.jpg",
       span: "lg:col-span-3",
     },
     {
-      tag: "User",
-      title: "Customer Installations",
+      title: "User",
       img: "https://zolar.wpengine.com/wp-content/uploads/2024/07/portfolio-detail-2-02.jpg",
       span: "lg:col-span-3",
     },
