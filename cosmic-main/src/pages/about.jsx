@@ -291,14 +291,7 @@ const About = () => {
         </div>
       </motion.section>
 
-      <motion.div
-        variants={fadeUpVariant}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-      >
-        <TeamSection />
-      </motion.div>
+    
 
       <motion.section
         initial="hidden"

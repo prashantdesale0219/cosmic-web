@@ -114,6 +114,7 @@ const TestimonialVideo = () => {
   const [hasAnimated, setHasAnimated] = useState(false);
   const sectionRef = useRef(null);
   const videoRef = useRef(null);
+  const companyVideoRef = useRef(null);
   
   // Handle counter animation
   useEffect(() => {
@@ -161,13 +162,35 @@ const TestimonialVideo = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [hasAnimated]);
   
-  // Ensure video is always playing
+  // Ensure background video is always playing
   useEffect(() => {
     const video = videoRef.current;
     
     if (video) {
       video.play().catch(error => {
-        console.error("Video play failed:", error);
+        console.error("Background video play failed:", error);
+      });
+      
+      // Add event listener for when video ends
+      const handleVideoEnded = () => {
+        video.play();
+      };
+      
+      video.addEventListener('ended', handleVideoEnded);
+      
+      return () => {
+        video.removeEventListener('ended', handleVideoEnded);
+      };
+    }
+  }, []);
+  
+  // Ensure company video is always playing
+  useEffect(() => {
+    const video = companyVideoRef.current;
+    
+    if (video) {
+      video.play().catch(error => {
+        console.error("Company video play failed:", error);
       });
       
       // Add event listener for when video ends
@@ -233,10 +256,15 @@ const TestimonialVideo = () => {
                   transition={{ duration: 0.6 }}
                   viewport={{ once: true }}
                 >
-                  <img 
-                    src="/Happyclientimage..jpg" 
+                  <video 
+                    ref={companyVideoRef}
+                    src="/enn.mp4" 
                     alt="Solex Energy 30 Years" 
                     className="w-full h-auto rounded-lg shadow-md"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
                   />
                 </motion.div>
               </div>

@@ -1,52 +1,145 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { FaQuoteLeft, FaQuoteRight, FaLinkedin, FaTwitter, FaEnvelope } from 'react-icons/fa';
+import { FaLinkedin, FaTwitter, FaEnvelope, FaQuoteLeft, FaQuoteRight } from 'react-icons/fa';
+import { FaTimesCircle } from 'react-icons/fa';
+import { FaMessage } from 'react-icons/fa6';
+import TeamSection from '../components/TeamSection';
 
 const fadeUpVariant = {
   hidden: { opacity: 0, y: 60 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
 };
 
-const DirectorDesk = () => {
-  // Director information
-  const director = {
-    name: "Rajesh Kumar",
-    position: "Managing Director & CEO",
-    image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=800&q=80",
-    qualification: "M.Tech (Renewable Energy), MBA",
-    experience: "20+ years in Solar Energy Sector",
-    message: "As the Managing Director of Cosmic Solar Tech, I am proud to lead a team dedicated to revolutionizing the renewable energy landscape in India. Our journey began with a simple vision: to make clean, sustainable energy accessible to all. Today, we stand at the forefront of solar innovation, helping businesses and homeowners reduce their carbon footprint while achieving significant energy cost savings.\n\nThe global shift towards renewable energy is not just a trend but a necessity for our planet's future. At Cosmic Solar Tech, we are committed to accelerating this transition through cutting-edge technology, exceptional service, and unwavering integrity. Our team of experts works tirelessly to deliver customized solar solutions that meet the unique needs of each client.\n\nAs we look to the future, we remain focused on continuous innovation and expansion of our product offerings. We are investing in research and development to enhance solar efficiency, exploring energy storage solutions, and developing smart energy management systems that will define the next generation of renewable energy.\n\nI invite you to join us on this exciting journey towards a greener, more sustainable future. Together, we can harness the power of the sun to create a cleaner world for generations to come.",
-    vision: "To be the leading provider of innovative solar solutions in India, driving the nation's transition to clean energy through excellence, integrity, and customer-centric approach.",
-    socialLinks: [
-      { platform: "LinkedIn", url: "https://linkedin.com", icon: FaLinkedin },
-      { platform: "Twitter", url: "https://twitter.com", icon: FaTwitter },
-      { platform: "Email", url: "mailto:director@cosmicsolar.com", icon: FaEnvelope },
-    ],
-  };
+// Modal component for director's message popup
+const MessageModal = ({ isOpen, onClose, director }) => {
+  if (!isOpen) return null;
+  
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-70 transition-opacity duration-300">
+      <motion.div 
+        initial={{ opacity: 0, scale: 0.9 }} 
+        animate={{ opacity: 1, scale: 1 }}
+        exit={{ opacity: 0, scale: 0.9 }}
+        className="bg-white rounded-lg shadow-xl max-w-3xl w-full max-h-[80vh] overflow-hidden flex flex-col"
+      >
+        <div className="flex items-center justify-between p-4 border-b border-gray-200 bg-gray-50">
+          <h3 className="text-xl font-bold text-gray-900">Message from {director?.name}</h3>
+          <button 
+            onClick={onClose}
+            className="text-gray-500 hover:text-gray-700 transition-colors"
+            aria-label="Close modal"
+          >
+            <FaTimesCircle className="w-6 h-6" />
+          </button>
+        </div>
+        
+        <div className="p-6 overflow-y-auto">
+          <div className="relative text-gray-700 space-y-4">
+            <FaQuoteLeft className="text-accent-500/30 h-8 w-8 mb-4" />
+            
+            {director?.message.split('\n\n').map((paragraph, index) => (
+              <p key={index} className="leading-relaxed">{paragraph}</p>
+            ))}
+            
+            <FaQuoteRight className="text-accent-500/30 h-8 w-8 ml-auto mt-4" />
+          </div>
+          
+          <div className="mt-8 p-4 bg-primary-600 text-white rounded-lg">
+            <h4 className="text-lg font-bold mb-2 flex items-center">
+              <span className="mr-2 text-accent-500">Vision</span>
+              <span className="h-px flex-grow bg-accent-500/30"></span>
+            </h4>
+            <p className="italic">"{director?.vision}"</p>
+          </div>
+        </div>
+        
+        <div className="p-4 border-t border-gray-200 bg-gray-50 flex justify-end">
+          <button
+            onClick={onClose}
+            className="px-4 py-2 bg-accent-500 text-black rounded-md hover:bg-accent-600 transition-colors"
+          >
+            Close
+          </button>
+        </div>
+      </motion.div>
+    </div>
+  );
+};
 
-  // Key initiatives
-  const initiatives = [
+const DirectorDesk = () => {
+  // State for message modal
+  const [selectedDirector, setSelectedDirector] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  
+  const openModal = (director) => {
+    setSelectedDirector(director);
+    setIsModalOpen(true);
+    // Prevent body scrolling when modal is open
+    document.body.style.overflow = 'hidden';
+  };
+  
+  const closeModal = () => {
+    setIsModalOpen(false);
+    // Re-enable body scrolling
+    document.body.style.overflow = 'auto';
+  };
+  
+  // Directors information
+  const directors = [
     {
-      title: "Rural Electrification Project",
-      description: "Leading a mission to bring solar power to 100 off-grid villages across India by 2026.",
+      name: "Alex Morgan",
+      position: "Director & Head - Operations",
+      image: "https://zolar.wpengine.com/wp-content/uploads/2025/01/Home1-Team-img11.jpg",
+      qualification: "MBA (Operations), B.Tech",
+      experience: "15+ years in Operations Management",
+      message: "As the Director of Operations at Cosmic Solar Tech, I am committed to ensuring operational excellence across all our projects. My focus is on streamlining processes, optimizing resource allocation, and maintaining the highest standards of quality in every installation we undertake.\n\nAt Cosmic Solar Tech, we believe that operational efficiency is the backbone of successful solar implementation. Our team works diligently to create seamless experiences for our clients, from initial consultation to final installation and beyond. We continuously refine our methodologies to stay ahead of industry standards and deliver projects on time and within budget.\n\nI am particularly proud of our track record in handling complex, large-scale solar installations for industrial clients. Our systematic approach to project management has enabled us to tackle challenging projects while maintaining our commitment to quality and customer satisfaction.\n\nI look forward to bringing operational excellence to your solar energy projects and helping you achieve your sustainability goals with confidence and ease.",
+      vision: "To establish industry-leading operational standards that make solar energy adoption seamless and efficient for all our clients.",
+      socialLinks: [
+        { platform: "LinkedIn", url: "https://linkedin.com", icon: FaLinkedin },
+        { platform: "Twitter", url: "https://twitter.com", icon: FaTwitter },
+        { platform: "Email", url: "mailto:alex@cosmicsolar.com", icon: FaEnvelope },
+      ],
     },
     {
-      title: "Green Corporate Campus Initiative",
-      description: "Partnering with major corporations to transform their facilities into solar-powered, carbon-neutral campuses.",
+      name: "Henry Wilson",
+      position: "Director & Head - Quality",
+      image: "https://zolar.wpengine.com/wp-content/uploads/2025/01/Home1-Team-img11.jpg",
+      qualification: "M.Sc (Quality Management), Six Sigma Black Belt",
+      experience: "18+ years in Quality Assurance",
+      message: "As the Director of Quality at Cosmic Solar Tech, my primary responsibility is ensuring that every solar solution we deliver meets the highest standards of excellence. Quality is not just a department at our company—it's a mindset that permeates everything we do.\n\nIn the renewable energy sector, quality directly translates to system performance, longevity, and return on investment for our clients. That's why we've implemented rigorous quality control processes at every stage of our operations, from component selection to installation and after-sales service.\n\nOur quality assurance team works closely with suppliers, installation crews, and maintenance personnel to create a seamless quality ecosystem. We continuously monitor industry developments and regulatory changes to ensure our practices remain at the cutting edge.\n\nI am committed to maintaining Cosmic Solar Tech's reputation for reliability and excellence in the solar industry, and I look forward to demonstrating our quality commitment on your next project.",
+      vision: "To set new benchmarks for quality in the solar industry through rigorous standards, continuous improvement, and unwavering attention to detail.",
+      socialLinks: [
+        { platform: "LinkedIn", url: "https://linkedin.com", icon: FaLinkedin },
+        { platform: "Twitter", url: "https://twitter.com", icon: FaTwitter },
+        { platform: "Email", url: "mailto:henry@cosmicsolar.com", icon: FaEnvelope },
+      ],
     },
     {
-      title: "Solar Innovation Lab",
-      description: "Established a research facility focused on developing next-generation solar technologies with improved efficiency and reduced costs.",
-    },
-    {
-      title: "Skill Development Program",
-      description: "Training the next generation of solar technicians and engineers through partnerships with technical institutions.",
+      name: "James Peterson",
+      position: "Director & Head - Production",
+      image: "https://zolar.wpengine.com/wp-content/uploads/2025/01/Home1-Team-img11.jpg",
+      qualification: "M.Tech (Manufacturing), PMP Certified",
+      experience: "16+ years in Production Management",
+      message: "As the Director of Production at Cosmic Solar Tech, I oversee the critical processes that transform innovative designs into functional solar energy systems. My team is responsible for ensuring that every component meets our exacting specifications and that our installation teams have everything they need to deliver exceptional results.\n\nProduction excellence in the solar industry requires a delicate balance of precision engineering, quality control, and efficient logistics. At Cosmic Solar Tech, we've developed sophisticated production methodologies that allow us to scale our operations while maintaining the highest standards of quality and reliability.\n\nI take particular pride in our ability to customize production processes for unique project requirements. Whether we're working on residential rooftop installations or large-scale commercial projects, our production team adapts to ensure optimal outcomes.\n\nI am excited about the continuous advancements in solar technology and look forward to incorporating these innovations into our production processes to deliver even greater value to our clients.",
+      vision: "To create the most efficient and adaptable production systems in the solar industry, capable of delivering customized solutions with consistent quality and reliability.",
+      socialLinks: [
+        { platform: "LinkedIn", url: "https://linkedin.com", icon: FaLinkedin },
+        { platform: "Twitter", url: "https://twitter.com", icon: FaTwitter },
+        { platform: "Email", url: "mailto:james@cosmicsolar.com", icon: FaEnvelope },
+      ],
     },
   ];
 
   return (
     <div className="min-h-screen font-['Space_Grotesk']">
+      {/* Message Modal */}
+      <MessageModal 
+        isOpen={isModalOpen} 
+        onClose={closeModal} 
+        director={selectedDirector} 
+      />
+      
       {/* HERO SECTION */}
       <motion.header
         initial="hidden"
@@ -62,150 +155,107 @@ const DirectorDesk = () => {
         <div className="relative z-10 text-center text-white px-4">
           <h1 className="text-4xl sm:text-5xl font-bold mb-4">Director's Desk</h1>
           <nav className="flex items-center justify-center space-x-2 text-sm">
-            <Link to="/" className="hover:text-green-400 transition">
+            <Link to="/" className="hover:text-accent-500 transition">
               Home
             </Link>
             <span>—</span>
-            <Link to="/about" className="hover:text-green-400 transition">
+            <Link to="/about" className="hover:text-accent-500 transition">
               About
             </Link>
             <span>—</span>
-            <span className="text-green-400">Director's Desk</span>
+            <span className="text-accent-500">Director's Desk</span>
           </nav>
         </div>
       </motion.header>
 
-      {/* DIRECTOR PROFILE SECTION */}
-      <motion.section
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        variants={fadeUpVariant}
-        className="py-16 px-4 sm:px-6 lg:px-8 bg-white"
-      >
+      {/* DIRECTORS PROFILES SECTION */}
+      <section className="py-12 px-4 sm:px-6 lg:px-8 bg-white">
         <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-3 gap-12 items-start">
-            {/* Director Image and Info */}
-            <motion.div
-              variants={fadeUpVariant}
-              className="md:col-span-1"
-            >
-              <div className="relative">
-                <img
-                  src={director.image}
-                  alt={director.name}
-                  className="w-full h-auto rounded-lg shadow-lg"
-                />
-                <div className="absolute -bottom-6 -right-6 bg-[#cae28e] p-4 rounded-lg shadow-lg">
-                  <img
-                    src="/logo.png"
-                    alt="Company Logo"
-                    className="h-12 w-auto"
-                  />
-                </div>
-              </div>
-              
-              <div className="mt-12 bg-gray-50 p-6 rounded-lg shadow-sm">
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">{director.name}</h3>
-                <p className="text-[#cae28e] font-semibold mb-4">{director.position}</p>
-                
-                <div className="space-y-3 mb-6">
-                  <p className="text-gray-700 flex items-center gap-2">
-                    <span className="font-semibold">Qualification:</span> {director.qualification}
-                  </p>
-                  <p className="text-gray-700 flex items-center gap-2">
-                    <span className="font-semibold">Experience:</span> {director.experience}
-                  </p>
-                </div>
-                
-                <div className="flex items-center space-x-4">
-                  {director.socialLinks.map((link) => (
-                    <a
-                      key={link.platform}
-                      href={link.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-gray-700 hover:text-[#cae28e] transition-colors duration-300"
-                      aria-label={`Connect with director on ${link.platform}`}
-                    >
-                      <link.icon className="h-5 w-5" />
-                    </a>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-            
-            {/* Director's Message */}
-            <motion.div
-              variants={fadeUpVariant}
-              className="md:col-span-2"
-            >
-              <div className="mb-8">
-                <h2 className="text-3xl font-bold mb-6 relative">
-                  <span className="relative z-10">Message from the Director</span>
-                  <span className="absolute bottom-0 left-0 h-3 w-24 bg-[#cae28e]/40 -z-0"></span>
-                </h2>
-                
-                <div className="relative text-gray-700 space-y-4">
-                  <FaQuoteLeft className="absolute top-0 left-0 text-[#cae28e]/30 h-12 w-12 -translate-x-6 -translate-y-6" />
-                  
-                  {director.message.split('\n\n').map((paragraph, index) => (
-                    <p key={index} className="leading-relaxed">{paragraph}</p>
-                  ))}
-                  
-                  <FaQuoteRight className="absolute bottom-0 right-0 text-[#cae28e]/30 h-12 w-12 translate-x-6 translate-y-6" />
-                </div>
-              </div>
-              
-              <div className="mt-12 p-6 bg-[#13181f] text-white rounded-lg shadow-lg">
-                <h3 className="text-xl font-bold mb-4 flex items-center">
-                  <span className="mr-2 text-[#cae28e]">Our Vision</span>
-                  <span className="h-px flex-grow bg-[#cae28e]/30"></span>
-                </h3>
-                <p className="italic">"{director.vision}"</p>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </motion.section>
-
-
-      {/* KEY INITIATIVES SECTION */}
-      <motion.section
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        variants={fadeUpVariant}
-        className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50"
-      >
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4">Key Initiatives</h2>
-            <p className="text-gray-600 max-w-3xl mx-auto">
-              Under the leadership of our director, we are driving several strategic initiatives to expand our impact and advance solar technology.
-            </p>
-          </div>
+          <h2 className="text-3xl font-bold mb-10 text-center relative inline-block">
+            <span className="relative z-10">Our Directors</span>
+            <span className="absolute bottom-0 left-0 h-3 w-full bg-accent-500/40 -z-0"></span>
+          </h2>
           
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-            {initiatives.map((initiative, index) => (
+          <div className="space-y-16">
+            {directors.map((director, index) => (
               <motion.div
-                key={initiative.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow"
+                key={director.name}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.2 }}
+                variants={fadeUpVariant}
+                className="flex flex-col md:flex-row gap-8 items-center"
               >
-                <div className="h-12 w-12 rounded-full bg-[#cae28e]/20 flex items-center justify-center mb-4">
-                  <span className="text-xl font-bold text-[#cae28e]">{index + 1}</span>
+                {/* Director Image - Prominent */}
+                <div className={`relative w-full md:w-1/3 ${index % 2 !== 0 ? 'md:order-2' : ''}`}>
+                  <div className="relative overflow-hidden rounded-lg shadow-xl">
+                    <img
+                      src={director.image}
+                      alt={director.name}
+                      className="w-full h-auto object-cover transition-transform duration-500 hover:scale-105"
+                    />
+                    <div className="absolute top-0 right-0 bg-accent-500 p-2 rounded-bl-lg">
+                      <img
+                        src="/logo.png"
+                        alt="Company Logo"
+                        className="h-6 w-auto"
+                      />
+                    </div>
+                  </div>
                 </div>
-                <h3 className="text-lg font-bold text-gray-900 mb-2">{initiative.title}</h3>
-                <p className="text-gray-700">{initiative.description}</p>
+                
+                {/* Director Info with Short Message */}
+                <div className={`w-full md:w-2/3 ${index % 2 !== 0 ? 'md:order-1 md:text-right' : ''}`}>
+                  <h3 className="text-2xl font-bold text-gray-900 mb-2">{director.name}</h3>
+                  <p className="text-accent-500 font-semibold text-lg mb-4">{director.position}</p>
+                  
+                  {/* Short Message Preview - Larger size with better styling */}
+                  <div className="bg-gray-50 p-5 rounded-lg border-l-4 border-accent-500 mb-6 shadow-sm relative">
+                    <FaQuoteLeft className="text-accent-500/30 text-4xl absolute top-3 left-3" />
+                    <p className="text-gray-700 leading-relaxed text-base italic pl-8 pt-2">
+                      {director.message.split('\n\n')[0]}
+                    </p>
+                  </div>
+                   
+                  <div className={`flex ${index % 2 !== 0 ? 'justify-end' : 'justify-start'} gap-4`}>
+                    {/* Message Button */}
+                    <button
+                      onClick={() => openModal(director)}
+                      className="flex items-center gap-2 px-5 py-2.5 bg-accent-500 text-black font-medium rounded-md hover:bg-accent-600 transition-colors duration-300"
+                    >
+                      <FaMessage className="h-4 w-4" />
+                      <span>Read Full Message</span>
+                    </button>
+                    
+                    {/* LinkedIn Link if available */}
+                    {director.socialLinks.find(link => link.platform === "LinkedIn") && (
+                      <a 
+                        href={director.socialLinks.find(link => link.platform === "LinkedIn").url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 px-5 py-2.5 border border-gray-300 text-gray-700 font-medium rounded-md hover:bg-gray-100 transition-colors duration-300"
+                      >
+                        <FaLinkedin className="h-4 w-4" />
+                        <span>LinkedIn</span>
+                      </a>
+                    )}
+                  </div>
+                </div>
               </motion.div>
             ))}
           </div>
         </div>
-      </motion.section>
+      </section>
+
+      {/* TEAM SECTION */}
+      <motion.div
+        variants={fadeUpVariant}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+      >
+        <TeamSection />
+      </motion.div>
 
       {/* CTA SECTION */}
       <motion.section
@@ -213,7 +263,7 @@ const DirectorDesk = () => {
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
         variants={fadeUpVariant}
-        className="py-16 px-4 sm:px-6 lg:px-8 bg-[#13181f] text-white"
+        className="py-16 px-4 sm:px-6 lg:px-8 bg-primary-600 text-white"
       >
         <div className="max-w-7xl mx-auto text-center">
           <h2 className="text-3xl font-bold mb-6">Join Us in Our Solar Mission</h2>
@@ -223,17 +273,17 @@ const DirectorDesk = () => {
           <div className="flex flex-wrap justify-center gap-4">
             <Link
               to="/contact"
-              className="group relative overflow-hidden inline-flex items-center px-8 py-4 rounded-full bg-[#cae28e] text-black font-semibold shadow-lg border-2 border-transparent hover:border-[#cae28e] transition-all duration-300"
+              className="group relative overflow-hidden inline-flex items-center px-8 py-4 rounded-full bg-accent-500 text-black font-semibold shadow-lg border-2 border-transparent hover:border-accent-500 transition-all duration-300"
             >
               <span className="relative z-10 transition-colors duration-300 group-hover:text-white">Contact Us</span>
               <span className="absolute inset-0 bg-black transform translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-in-out"></span>
             </Link>
             <Link
               to="/careers"
-              className="group relative overflow-hidden inline-flex items-center px-8 py-4 rounded-full bg-transparent border-2 border-white text-white font-semibold hover:border-[#cae28e] transition-all duration-300"
+              className="group relative overflow-hidden inline-flex items-center px-8 py-4 rounded-full bg-transparent border-2 border-white text-white font-semibold hover:border-accent-500 transition-all duration-300"
             >
               <span className="relative z-10 transition-colors duration-300">Join Our Team</span>
-              <span className="absolute inset-0 bg-[#cae28e] transform translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-in-out"></span>
+              <span className="absolute inset-0 bg-accent-500 transform translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-in-out"></span>
             </Link>
           </div>
         </div>

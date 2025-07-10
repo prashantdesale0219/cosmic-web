@@ -58,7 +58,7 @@ export default function Navbar() {
     { label: "Projects", href: "/projects" },
     { label: "Calculator", href: "/calculator" },
     { 
-      label: "NewsRoom", 
+      label: "Media", 
       href: "/blog",
       submenu: [
         { label: "Blog", href: "/blog" },

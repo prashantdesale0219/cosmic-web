@@ -28,14 +28,7 @@ const members = [
     bio: "James is responsible for consistency and excellent product and service quality. Strengthening the quality of the processes and product through implementing best practices, and working with various suppliers at Cosmic.",
     linkedin: "#"
   },
-  {
-    img: "https://zolar.wpengine.com/wp-content/uploads/2025/01/Home1-Team-img11.jpg",
-    name: "Michael Davis",
-    role: "Director",
-    title: "Head - Finance",
-    bio: "Michael is responsible for consistency and excellent product and service quality. Strengthening the quality of the processes and product through implementing best practices, and working with various suppliers at Cosmic.",
-    linkedin: "#"
-  },
+  
 ];
 
 
@@ -54,7 +47,7 @@ const TeamSection = () => {
   return (
     <>
   <section className="relative bg-white py-16">
-    <div className="max-w-7xl mx-auto px-4 lg:px-8 py-12">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       {/* heading */}
       <header className="mb-12">
         <div className="border-l-4 border-primary-600 pl-4">
@@ -65,18 +58,18 @@ const TeamSection = () => {
         </p>
       </header>
 
-      <div className="mt-8">
+      <div className="mt-10">
         <p className="text-sm font-medium text-primary-600 uppercase mb-6 flex items-center">
           <span className="inline-block w-6 h-0.5 bg-primary-600 mr-2"></span>
           OUR PEOPLE
         </p>
         
         {/* cards */}
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-12 sm:gap-10 md:gap-12 sm:grid-cols-2 lg:grid-cols-3 justify-items-center mx-auto">
           {members.map((member) => {
             const isExpanded = expandedMember === member.name;
             return (
-              <div key={member.name} className="flex flex-col group border border-gray-200 hover:border-primary-300 hover:shadow-lg hover:shadow-primary-100 transition-all duration-300 overflow-hidden">
+              <div key={member.name} className="flex flex-col group border border-gray-200 hover:border-primary-300 hover:shadow-lg hover:shadow-primary-100 transition-all duration-300 overflow-hidden w-full max-w-sm mx-auto">
                 <div className="relative overflow-hidden">
                   {/* Expandable Bio Section - Positioned over image */}
                   {isExpanded && (
