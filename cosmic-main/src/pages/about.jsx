@@ -128,7 +128,8 @@ const About = () => {
             className="mb-16"
           >
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
               {/* Card 1 - Textiles */}
               <div className="rounded-xl overflow-hidden shadow-lg border border-gray-100 transition-all duration-300 hover:shadow-xl hover:scale-[1.02] h-52">
                 <div className="relative h-full w-full overflow-hidden">
@@ -154,7 +155,7 @@ const About = () => {
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                   <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
-                    <h4 className="text-white font-bold text-lg">
+                    <h4 className="text-white font-bold text-sm">
                       Paper Packaging
                     </h4>
                   </div>
@@ -170,7 +171,7 @@ const About = () => {
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                   <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
-                    <h4 className="text-white font-bold text-lg">Hospital</h4>
+                    <h4 className="text-white font-bold text-sm">Hospital</h4>
                   </div>
                 </div>
               </div>
@@ -184,7 +185,7 @@ const About = () => {
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                   <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
-                    <h4 className="text-white font-bold text-lg">Automobile</h4>
+                    <h4 className="text-white font-bold text-sm">Automobile</h4>
                   </div>
                 </div>
               </div>
@@ -198,7 +199,7 @@ const About = () => {
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                   <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
-                    <h4 className="text-white font-bold text-lg">
+                    <h4 className="text-white font-bold text-sm">
                       Banking
                     </h4>
                   </div>
@@ -214,7 +215,7 @@ const About = () => {
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                   <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
-                    <h4 className="text-white font-bold text-lg">
+                    <h4 className="text-white font-bold text-sm">
                       Chemicals
                     </h4>
                   </div>
@@ -230,7 +231,7 @@ const About = () => {
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                   <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
-                    <h4 className="text-white font-bold text-lg">
+                    <h4 className="text-white font-bold text-sm">
                       Diary Industry
                     </h4>
                   </div>
