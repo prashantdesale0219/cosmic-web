@@ -330,7 +330,7 @@ const Home = () => {
                     01
                   </span>
                   <img
-                    src="/site-assessment.jpg"
+                    src="/Assessment.jpg"
                     alt="Site Assessment"
                     className="h-full w-full object-cover object-center"
                   />
@@ -372,7 +372,7 @@ const Home = () => {
                     02
                   </span>
                   <img
-                    src="/solar_design.png"
+                    src="/Agreement.jpg"
                     alt="Agreement"
                     className="h-full w-full object-cover object-center"
                   />
@@ -414,7 +414,7 @@ const Home = () => {
                     03
                   </span>
                   <img
-                    src="/installation.jpg"
+                    src="/installation2.jpg"
                     alt="Installation"
                     className="h-full w-full object-cover object-center"
                   />
@@ -448,7 +448,7 @@ const Home = () => {
                     04
                   </span>
                   <img
-                    src="/quality-assurance.jpg"
+                    src="/quality1.jpg"
                     alt="Quality Assurance"
                     className="h-full w-full object-cover object-center"
                   />
