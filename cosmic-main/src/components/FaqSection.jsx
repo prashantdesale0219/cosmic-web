@@ -26,6 +26,26 @@ const fallbackFaqs = [
     answer:
       'We provide a user-friendly monitoring app that shows real-time energy production, consumption, and savings. You can track performance, get maintenance alerts, and view historical data.',
   },
+  {
+    question: 'What Makes Cosmic Energy Solutions Different From Other Solar Providers?',
+    answer:
+      'Cosmic Energy Solutions stands out with our cutting-edge technology, comprehensive end-to-end service, and commitment to sustainability. We offer customized solutions tailored to your specific energy needs and provide industry-leading warranties and after-sales support.',
+  },
+  {
+    question: 'Are There Any Government Incentives Available For Solar Installation?',
+    answer:
+      'Yes, there are various government incentives available including tax credits, rebates, and solar renewable energy certificates (SRECs). Our team stays updated on all available incentives and will help you maximize your savings through these programs.',
+  },
+  {
+    question: 'How Much Maintenance Do Solar Panels Require?',
+    answer:
+      'Solar panels require minimal maintenance. Occasional cleaning to remove dust and debris is typically sufficient. We recommend a professional inspection once a year to ensure optimal performance. Our maintenance packages include regular check-ups and cleaning services.',
+  },
+  {
+    question: 'What Happens To Solar Panels During Extreme Weather?',
+    answer:
+      'Our solar panels are designed to withstand extreme weather conditions including heavy rain, snow, and high winds. They undergo rigorous testing to ensure durability and performance in various environmental conditions. In case of severe weather events, our systems include protective measures to prevent damage.',
+  },
 ]
 
 export default function FaqSection() {
@@ -35,6 +55,8 @@ export default function FaqSection() {
   const [scale, setScale] = useState(1)
   const [leftImageTranslate, setLeftImageTranslate] = useState(0)
   const [rightImageTranslate, setRightImageTranslate] = useState(0)
+  const [currentPage, setCurrentPage] = useState(1)
+  const [faqsPerPage] = useState(4)
   const lastScrollY = useRef(0)
   const requestRef = useRef()
   const spinnerRef = useRef(null)
@@ -42,12 +64,36 @@ export default function FaqSection() {
   const rightImageRef = useRef(null)
   
   // Use API data or fallback to static data
-  const faqs = apiFaqs && apiFaqs.length > 0 
+  const allFaqs = apiFaqs && apiFaqs.length > 0 
     ? apiFaqs.map(faq => ({
         question: faq.question,
         answer: faq.answer
       }))
     : fallbackFaqs
+    
+  // Get current FAQs for pagination
+  const indexOfLastFaq = currentPage * faqsPerPage
+  const indexOfFirstFaq = indexOfLastFaq - faqsPerPage
+  const currentFaqs = allFaqs.slice(indexOfFirstFaq, indexOfLastFaq)
+  
+  // Change page
+  const paginate = (pageNumber) => setCurrentPage(pageNumber)
+  
+  // Go to next page
+  const nextPage = () => {
+    if (currentPage < Math.ceil(allFaqs.length / faqsPerPage)) {
+      setCurrentPage(currentPage + 1)
+      setExpanded(null) // Reset expanded state when changing page
+    }
+  }
+  
+  // Go to previous page
+  const prevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1)
+      setExpanded(null) // Reset expanded state when changing page
+    }
+  }
 
   const fadeUpVariant = {
     hidden: { opacity: 0, y: 40 },
@@ -110,7 +156,7 @@ export default function FaqSection() {
             <div className="h-[2px] w-10 bg-green-600" />
           </div>
           <div className="space-y-4">
-            {faqs.map((faq, index) => (
+            {currentFaqs.map((faq, index) => (
               <div
                 key={index}
                 onClick={() => setExpanded(index === expanded ? null : index)}
@@ -133,6 +179,43 @@ export default function FaqSection() {
                 )}
               </div>
             ))}
+            
+            {/* Pagination Controls */}
+            <div className="mt-8 flex justify-center items-center space-x-4">
+              <button
+                onClick={prevPage}
+                disabled={currentPage === 1}
+                className={`px-4 py-2 rounded-lg flex items-center ${currentPage === 1 ? 'text-gray-400 cursor-not-allowed' : 'text-green-600 hover:text-green-700'}`}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />
+                </svg>
+                Previous
+              </button>
+              
+              <div className="flex space-x-2">
+                {Array.from({ length: Math.ceil(allFaqs.length / faqsPerPage) }, (_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => paginate(i + 1)}
+                    className={`w-8 h-8 rounded-full flex items-center justify-center transition-colors ${currentPage === i + 1 ? 'bg-green-600 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}`}
+                  >
+                    {i + 1}
+                  </button>
+                ))}
+              </div>
+              
+              <button
+                onClick={nextPage}
+                disabled={currentPage === Math.ceil(allFaqs.length / faqsPerPage)}
+                className={`px-4 py-2 rounded-lg flex items-center ${currentPage === Math.ceil(allFaqs.length / faqsPerPage) ? 'text-gray-400 cursor-not-allowed' : 'text-green-600 hover:text-green-700'}`}
+              >
+                Next
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-1" viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
+                </svg>
+              </button>
+            </div>
           </div>
         </motion.div>
 

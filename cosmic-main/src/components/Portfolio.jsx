@@ -30,7 +30,7 @@ export default function Portfolio() {
       span: "lg:col-span-3",
     },
     {
-      title: "CLI",
+      title: "CNI",
       img: "https://zolar.wpengine.com/wp-content/uploads/2024/07/portfolio-detail-1-01.jpg",
       span: "lg:col-span-3",
     },
@@ -45,7 +45,7 @@ export default function Portfolio() {
       span: "lg:col-span-3",
     },
     {
-      title: "User",
+      title: "End User",
       img: "https://zolar.wpengine.com/wp-content/uploads/2024/07/portfolio-detail-2-02.jpg",
       span: "lg:col-span-3",
     },

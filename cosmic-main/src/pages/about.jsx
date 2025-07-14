@@ -493,7 +493,7 @@ const About = () => {
         <AwardsTimeline />
       </motion.div>
 
-      {/* VISION, MISSION, VALUES SECTION */}
+      {/* LEADERSHIP TEAM SECTION */}
       <motion.section
         initial="hidden"
         whileInView="visible"
@@ -502,51 +502,63 @@ const About = () => {
         className="bg-white py-16 px-4 sm:px-6 lg:px-8"
       >
         <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-3 gap-8">
-            {/* Vision */}
-            <motion.div variants={fadeUpVariant} className="text-left">
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Vision</h3>
-              <p className="text-gray-600">
-                Cosmic Powertech envisions a world where sustainable living is second nature, driven by the widespread adoption of clean, abundant renewable energy. We dedicate ourselves to crafting tailored solar solutions that precisely address the distinctive requirements of every household, business, and industry we serve, while simultaneously advancing a healthier planet. Our pledge reaches far beyond routine operations; it infuses each consultation, installation, and maintenance visit with purpose, ensuring measurable, long-term impact. Guided by an unwavering belief in a future powered exclusively by renewable resources, we continually innovate, educate, and collaborate to accelerate India’s transition toward carbon-free prosperity and global clean-energy leadership.
-
-              </p>
+          <div className="grid md:grid-cols-3 gap-12">
+            {/* Alex Morgan */}
+            <motion.div variants={fadeUpVariant} className="text-left bg-white rounded-xl shadow-md overflow-hidden">
+              <div className="p-6">
+                <h3 className="text-xl font-bold text-gray-900 mb-1">Vision</h3>
+              
+                <p className="text-gray-600 text-sm mb-4">
+                Cosmic Powertech envisions a world where sustainable living is second nature, driven by the widespread adoption of clean, abundant renewable energy. We dedicate ourselves to crafting tailored solar solutions that precisely address the distinctive requirements of every household, business, and industry we serve, while simultaneously advancing a healthier planet.
+                </p>
+                <p className="text-gray-600 text-sm mb-4">
+               Our pledge reaches far beyond routine operations; it infuses each consultation, installation, and maintenance visit with purpose, ensuring measurable, long-term impact. Guided by an unwavering belief in a future powered exclusively by renewable resources, we continually innovate, educate, and collaborate to accelerate India’s transition toward carbon-free prosperity and global clean-energy leadership.
+                </p>
+               
+              </div>
             </motion.div>
 
-            {/* Mission */}
-            <motion.div variants={fadeUpVariant} className="text-left">
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Mission</h3>
-              <p className="text-gray-600">
-                The dedication to achieve our vision is a reflected in our
-                mission to make solar power accessible and affordable, thereby
-                enabling individuals and businesses to participate actively in
-                the global shift towards sustainability. By integrating advanced
-                technology with personalized service, we aim to empower
-                communities to harness solar energy effectively, reducing
-                reliance on fossil fuels and promoting environmental
-                stewardship. Our efforts are aligned with broader initiatives to
-                mitigate climate change and support India’s green energy goals,
-                including the ambitious target of achieving 500 GW of renewable
-                energy capacity by 2030.
-              </p>
+            {/* Henry Wilson */}
+            <motion.div variants={fadeUpVariant} className="text-left bg-white rounded-xl shadow-md overflow-hidden">
+              <div className="p-6">
+                <h3 className="text-xl font-bold text-gray-900 mb-1">Mission</h3>
+                
+                <p className="text-gray-600 text-sm mb-4">
+              The dedication to achieve our vision is a reflected in our mission
+to make solar power accessible and affordable, thereby enabling
+individuals and businesses to participate actively in the global shift
+towards sustainability. 
+                </p>
+                <p className="text-gray-600 text-sm mb-4">
+                By integrating advanced technology with personalized service, we aim to
+empower communities to harness solar energy effectively, reducing reliance on
+fossil fuels and promoting environmental stewardship. Our efforts are aligned
+with broader initiatives to mitigate climate change and support India’s green
+energy goals, including the ambitious target of achieving 500 GW of renewable
+energy capacity by 2030.
+
+                </p>
+                <p className="text-gray-600 text-sm mb-4">
+                 Through our unwavering focus on quality, innovation, and customer
+satisfaction, Cosmic Powertech aspires to be a leading force in the renewable
+energy, driving positive change and contributing to a sustainable future for all. 
+                </p>
+              </div>
             </motion.div>
 
-            {/* Values */}
-            <motion.div variants={fadeUpVariant} className="text-left">
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Values</h3>
-              <p className="text-gray-600">
-                At Cosmic Powertech, our values are rooted in sustainability,
-                innovation, and people-first service. We are committed to making
-                solar energy accessible and affordable, empowering individuals
-                and businesses to join India’s green revolution. By integrating
-                advanced technology with customized solutions, we help reduce
-                dependence on fossil fuels and contribute to the nation’s goal
-                of 500 GW renewable energy by 2030. Every project reflects our
-                dedication to climate action, engineering excellence, and
-                long-term reliability. With a team driven by integrity and
-                purpose, we deliver clean energy solutions that not only power
-                homes and industries but also inspire a sustainable, greener
-                future.
-              </p>
+            {/* James Peterson */}
+            <motion.div variants={fadeUpVariant} className="text-left bg-white rounded-xl shadow-md overflow-hidden">
+              <div className="p-6">
+                <h3 className="text-xl font-bold text-gray-900 mb-1">Value</h3>
+                
+                <p className="text-gray-600 text-sm mb-4">
+                 At Cosmic Powertech, our values are rooted in sustainability, innovation, and people-first service. We are committed to making solar energy accessible and affordable, empowering individuals and businesses to join India’s green revolution. By integrating advanced technology with customized solutions, we help reduce dependence on fossil fuels and contribute to the nation’s goal of 500 GW renewable energy by 2030.
+                </p>
+                <p className="text-gray-600 text-sm mb-4">
+                  Every project reflects our dedication to climate action, engineering excellence, and long-term reliability. With a team driven by integrity and purpose, we deliver clean energy solutions that not only power homes and industries but also inspire a sustainable, greener future.
+                </p>
+               
+              </div>
             </motion.div>
           </div>
         </div>

@@ -13,6 +13,9 @@ const Contact = () => {
     email: "",
     message: "",
     systemType: "residential",
+    flats: "",
+    contactPerson: "",
+    businessType: "",
     termsAccepted: false
   });
   const [loading, setLoading] = useState(false);
@@ -53,6 +56,9 @@ const Contact = () => {
           email: "",
           message: "",
           systemType: selectedType,
+          flats: "",
+          contactPerson: "",
+          businessType: "",
           termsAccepted: false
         });
         // Refresh contact messages in context
@@ -244,13 +250,183 @@ const Contact = () => {
 
                   {selectedType === "housing_society" && (
                     <>
-                      {/* housing society fields */}
+                      <div className="space-y-1">
+                        <label className="text-xs font-medium text-accent-800">Society Name <span className="text-red-500">*</span></label>
+                          <input 
+                            type="text" 
+                            name="fullName"
+                            value={formData.fullName}
+                            onChange={handleInputChange}
+                            required 
+                            className="w-full rounded-lg px-5 py-3 bg-white/70 text-accent-800 text-sm focus:outline-none focus:ring-2 focus:ring-accent-800 border border-white/30"
+                          />
+                      </div>
+                      <div className="flex flex-col md:flex-row gap-4">
+                        <div className="flex-1 space-y-1">
+                          <label className="text-xs font-medium text-accent-800">City <span className="text-red-500">*</span></label>
+                          <input 
+                            type="text" 
+                            name="city"
+                            value={formData.city}
+                            onChange={handleInputChange}
+                            required 
+                            className="w-full rounded-lg px-5 py-3 bg-white/70 text-accent-800 text-sm focus:outline-none focus:ring-2 focus:ring-accent-800 border border-white/30"
+                          />
+                        </div>
+                        <div className="flex-1 space-y-1">
+                          <label className="text-xs font-medium text-accent-800">Pin code</label>
+                          <input 
+                            type="text" 
+                            name="pincode"
+                            value={formData.pincode}
+                            onChange={handleInputChange}
+                            className="w-full rounded-lg px-5 py-3 bg-white/70 text-accent-800 text-sm focus:outline-none focus:ring-2 focus:ring-accent-800 border border-white/30"
+                          />
+                        </div>
+                      </div>
+                      <div className="space-y-1">
+                        <label className="text-xs font-medium text-accent-800">Number of Flats</label>
+                        <input 
+                          type="number" 
+                          name="flats"
+                          value={formData.flats || ""}
+                          onChange={handleInputChange}
+                          className="w-full rounded-lg px-5 py-3 bg-white/70 text-accent-800 text-sm focus:outline-none focus:ring-2 focus:ring-accent-800 border border-white/30"
+                        />
+                      </div>
+                      <div className="space-y-1">
+                        <label className="text-xs font-medium text-accent-800">Contact Person <span className="text-red-500">*</span></label>
+                        <input 
+                          type="text" 
+                          name="contactPerson"
+                          value={formData.contactPerson || ""}
+                          onChange={handleInputChange}
+                          required
+                          className="w-full rounded-lg px-5 py-3 bg-white/70 text-accent-800 text-sm focus:outline-none focus:ring-2 focus:ring-accent-800 border border-white/30"
+                        />
+                      </div>
+                      <div className="space-y-1">
+                        <label className="text-xs font-medium text-accent-800">WhatsApp number <span className="text-red-500">*</span></label>
+                        <input 
+                          type="tel" 
+                          name="whatsapp"
+                          value={formData.whatsapp}
+                          onChange={handleInputChange}
+                          required 
+                          className="w-full rounded-lg px-5 py-3 bg-white/70 text-accent-800 text-sm focus:outline-none focus:ring-2 focus:ring-accent-800 border border-white/30"
+                        />
+                      </div>
+                      <div className="space-y-1">
+                        <label className="text-xs font-medium text-accent-800">Email Address</label>
+                        <input 
+                          type="email" 
+                          name="email"
+                          value={formData.email}
+                          onChange={handleInputChange}
+                          className="w-full rounded-lg px-5 py-3 bg-white/70 text-accent-800 text-sm focus:outline-none focus:ring-2 focus:ring-accent-800 border border-white/30"
+                        />
+                      </div>
+                      <div className="space-y-1">
+                        <label className="text-xs font-medium text-accent-800">Message</label>
+                        <textarea 
+                          name="message"
+                          value={formData.message}
+                          onChange={handleInputChange}
+                          rows="3" 
+                          className="w-full rounded-lg px-5 py-3 bg-white/70 text-accent-800 text-sm focus:outline-none focus:ring-2 focus:ring-accent-800 border border-white/30"
+                        ></textarea>
+                      </div>
                     </>
                   )}
 
                   {selectedType === "commercial" && (
                     <>
-                      {/* commercial fields */}
+                      <div className="space-y-1">
+                        <label className="text-xs font-medium text-accent-800">Company Name <span className="text-red-500">*</span></label>
+                          <input 
+                            type="text" 
+                            name="fullName"
+                            value={formData.fullName}
+                            onChange={handleInputChange}
+                            required 
+                            className="w-full rounded-lg px-5 py-3 bg-white/70 text-accent-800 text-sm focus:outline-none focus:ring-2 focus:ring-accent-800 border border-white/30"
+                          />
+                      </div>
+                      <div className="flex flex-col md:flex-row gap-4">
+                        <div className="flex-1 space-y-1">
+                          <label className="text-xs font-medium text-accent-800">City <span className="text-red-500">*</span></label>
+                          <input 
+                            type="text" 
+                            name="city"
+                            value={formData.city}
+                            onChange={handleInputChange}
+                            required 
+                            className="w-full rounded-lg px-5 py-3 bg-white/70 text-accent-800 text-sm focus:outline-none focus:ring-2 focus:ring-accent-800 border border-white/30"
+                          />
+                        </div>
+                        <div className="flex-1 space-y-1">
+                          <label className="text-xs font-medium text-accent-800">Pin code</label>
+                          <input 
+                            type="text" 
+                            name="pincode"
+                            value={formData.pincode}
+                            onChange={handleInputChange}
+                            className="w-full rounded-lg px-5 py-3 bg-white/70 text-accent-800 text-sm focus:outline-none focus:ring-2 focus:ring-accent-800 border border-white/30"
+                          />
+                        </div>
+                      </div>
+                      <div className="space-y-1">
+                        <label className="text-xs font-medium text-accent-800">Business Type</label>
+                        <input 
+                          type="text" 
+                          name="businessType"
+                          value={formData.businessType || ""}
+                          onChange={handleInputChange}
+                          className="w-full rounded-lg px-5 py-3 bg-white/70 text-accent-800 text-sm focus:outline-none focus:ring-2 focus:ring-accent-800 border border-white/30"
+                        />
+                      </div>
+                      <div className="space-y-1">
+                        <label className="text-xs font-medium text-accent-800">Contact Person <span className="text-red-500">*</span></label>
+                        <input 
+                          type="text" 
+                          name="contactPerson"
+                          value={formData.contactPerson || ""}
+                          onChange={handleInputChange}
+                          required
+                          className="w-full rounded-lg px-5 py-3 bg-white/70 text-accent-800 text-sm focus:outline-none focus:ring-2 focus:ring-accent-800 border border-white/30"
+                        />
+                      </div>
+                      <div className="space-y-1">
+                        <label className="text-xs font-medium text-accent-800">WhatsApp number <span className="text-red-500">*</span></label>
+                        <input 
+                          type="tel" 
+                          name="whatsapp"
+                          value={formData.whatsapp}
+                          onChange={handleInputChange}
+                          required 
+                          className="w-full rounded-lg px-5 py-3 bg-white/70 text-accent-800 text-sm focus:outline-none focus:ring-2 focus:ring-accent-800 border border-white/30"
+                        />
+                      </div>
+                      <div className="space-y-1">
+                        <label className="text-xs font-medium text-accent-800">Email Address</label>
+                        <input 
+                          type="email" 
+                          name="email"
+                          value={formData.email}
+                          onChange={handleInputChange}
+                          className="w-full rounded-lg px-5 py-3 bg-white/70 text-accent-800 text-sm focus:outline-none focus:ring-2 focus:ring-accent-800 border border-white/30"
+                        />
+                      </div>
+                      <div className="space-y-1">
+                        <label className="text-xs font-medium text-accent-800">Message</label>
+                        <textarea 
+                          name="message"
+                          value={formData.message}
+                          onChange={handleInputChange}
+                          rows="3" 
+                          className="w-full rounded-lg px-5 py-3 bg-white/70 text-accent-800 text-sm focus:outline-none focus:ring-2 focus:ring-accent-800 border border-white/30"
+                        ></textarea>
+                      </div>
                     </>
                   )}
 
