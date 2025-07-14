@@ -63,7 +63,8 @@ export default function Navbar() {
       submenu: [
         { label: "Blog", href: "/blog" },
         { label: "All Posts", href: "/blog" },
-        { label: "PR Page", href: "/pr" }
+        { label: "PR Page", href: "/pr" },
+        { label: "Achievements & Awards", href: "/achievements-awards" }
       ]
     },
     { label: "Contact", href: "/contact" },

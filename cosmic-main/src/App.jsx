@@ -33,6 +33,7 @@ import PressRelease from './pages/pr'
 import TeamCelebration from './pages/team-celebration'
 import DirectorDesk from './pages/director-desk'
 import CompanyCulture from './pages/company-culture'
+import AchievementsAwards from './pages/achievements-awards'
 
 
 // AppContent component to handle transitions
@@ -72,6 +73,7 @@ function AppContent() {
                 <Route path="/blog" element={<Blog />} />
                 <Route path="/blog/:id" element={<BlogDetail />} />
                 <Route path="/pr" element={<PressRelease />} />
+                <Route path="/achievements-awards" element={<AchievementsAwards />} />
                 <Route path="/team-celebration" element={<TeamCelebration />} />
                 <Route path="/director-desk" element={<DirectorDesk />} />
                 <Route path="/company-culture" element={<CompanyCulture />} />

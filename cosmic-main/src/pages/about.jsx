@@ -20,13 +20,19 @@ const About = () => {
         initial="hidden"
         animate="visible"
         variants={fadeUpVariant}
-        className="relative bg-cover bg-center h-64 sm:h-80 md:h-[300px] flex items-center justify-center"
-        style={{
-          backgroundImage:
-            "url('https://zolar.wpengine.com/wp-content/uploads/2025/01/zolar-breadcrumb-bg.jpg')",
-        }}
+        className="relative h-100 sm:h-80 md:h-[500px] flex items-center justify-center overflow-hidden"
       >
-        <div className="absolute inset-0 bg-black/50" />
+        <video 
+          className="absolute inset-0 w-full h-full object-cover" 
+          autoPlay 
+          muted 
+          loop 
+          playsInline
+        >
+          <source src="/aboutvideo.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+        <div className="absolute inset-0 bg-black/30" />
         <div className="relative z-10 text-center text-white px-4">
           <h1 className="text-4xl sm:text-5xl font-bold mb-4">About</h1>
           <nav className="flex items-center justify-center space-x-2 text-sm">
