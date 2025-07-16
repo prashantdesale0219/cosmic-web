@@ -101,13 +101,15 @@ const ProjectsPage = () => {
     // If projects are loaded from context, use them
     // Otherwise, try to fetch directly from API
     const getProjects = async () => {
-      if (projects && projects.length > 0) {
+      // Make sure projects is an array before using it
+      if (projects && Array.isArray(projects) && projects.length > 0) {
+        console.log('Using projects from context:', projects.length);
         setProjectData(projects);
         
         // Extract gallery images from projects for the gallery section
         const extractedImages = [];
         projects.forEach(project => {
-          if (project.images && project.images.length > 0) {
+          if (project.images && Array.isArray(project.images) && project.images.length > 0) {
             // Add up to 2 images from each project to the gallery
             project.images.slice(0, 2).forEach(img => {
               extractedImages.push({
@@ -128,15 +130,28 @@ const ProjectsPage = () => {
         // Limit to 6 images for gallery
         setGalleryData(extractedImages.slice(0, 6));
       } else {
+        console.log('No projects from context, fetching from API');
         try {
           const response = await axios.get('/api/projects');
-          if (response.data && response.data.length > 0) {
-            setProjectData(response.data);
+          console.log('API response:', response.data);
+          
+          // Handle different API response formats
+          let projectsData = [];
+          
+          if (response.data && response.data.data && Array.isArray(response.data.data)) {
+            projectsData = response.data.data;
+          } else if (response.data && Array.isArray(response.data)) {
+            projectsData = response.data;
+          }
+          
+          if (projectsData.length > 0) {
+            console.log('Setting project data from API:', projectsData.length);
+            setProjectData(projectsData);
             
             // Extract gallery images from API response
             const extractedImages = [];
-            response.data.forEach(project => {
-              if (project.images && project.images.length > 0) {
+            projectsData.forEach(project => {
+              if (project.images && Array.isArray(project.images) && project.images.length > 0) {
                 project.images.slice(0, 2).forEach(img => {
                   extractedImages.push({
                     image: img,
@@ -154,6 +169,9 @@ const ProjectsPage = () => {
             });
             
             setGalleryData(extractedImages.slice(0, 6));
+          } else {
+            // If no valid data, use fallback data
+            console.log('No valid project data from API, using fallback data');
           }
         } catch (error) {
           console.error('Error fetching projects:', error);

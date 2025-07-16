@@ -168,11 +168,23 @@ export const AppProvider = ({ children }) => {
     setLoading(prev => ({ ...prev, projects: true }));
     try {
       const response = await axios.get(`${API_BASE_URL}/projects`, { params });
-      setProjects(response.data.data);
+      // Check if response.data.data is an array before setting it
+      if (response.data && response.data.data && Array.isArray(response.data.data)) {
+        setProjects(response.data.data);
+      } else if (response.data && Array.isArray(response.data)) {
+        // If response.data is directly an array (possible API format difference in production)
+        setProjects(response.data);
+      } else {
+        console.error('Projects data is not in expected format:', response.data);
+        // Set projects to empty array if data is not in expected format
+        setProjects([]);
+      }
       setErrors(prev => ({ ...prev, projects: null }));
     } catch (error) {
       console.error('Error fetching projects:', error);
       setErrors(prev => ({ ...prev, projects: error.message }));
+      // Set projects to empty array on error
+      setProjects([]);
     } finally {
       setLoading(prev => ({ ...prev, projects: false }));
     }

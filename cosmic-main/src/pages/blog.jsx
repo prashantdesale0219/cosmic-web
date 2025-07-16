@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Calendar, ChevronLeft, ChevronRight } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Calendar, ChevronLeft, ChevronRight, Tag } from "lucide-react";
+import { Link, useLocation, useSearchParams } from "react-router-dom";
 import { useAppContext } from "../context/AppContext";
 import axios from "axios";
 
@@ -112,14 +112,34 @@ const PAGE_SIZE = 6;        // 6 posts / page = 3 rows × 2 columns
 export default function BlogGrid() {
   const [page, setPage] = useState(1);
   const { blogPosts, loading, fetchBlogPosts } = useAppContext();
+  const [searchParams] = useSearchParams();
+  const location = useLocation();
   
-  // Fetch blog posts when component mounts
+  // Get category from URL query parameter
+  const categoryParam = searchParams.get('category');
+  
+  // Fetch blog posts when component mounts or when URL parameters change
   useEffect(() => {
     fetchBlogPosts();
   }, []);
   
+  // Reset page to 1 when category changes
+  useEffect(() => {
+    setPage(1);
+  }, [categoryParam]);
+  
   // Use fallback data if API fails or while loading
-  const posts = blogPosts.length > 0 ? blogPosts : fallbackBlogPosts;
+  const allPosts = blogPosts.length > 0 ? blogPosts : fallbackBlogPosts;
+  
+  // Filter posts by category if category parameter exists
+  const posts = categoryParam
+    ? allPosts.filter(post => {
+        // Check if post has category that matches the parameter
+        // This assumes posts have a category field. Adjust as needed based on your data structure.
+        return post.category?.toLowerCase() === categoryParam.toLowerCase();
+      })
+    : allPosts;
+  
   const totalPages = Math.ceil(posts.length / PAGE_SIZE);
 
   const visible = posts.slice(
@@ -143,11 +163,19 @@ export default function BlogGrid() {
         
         {/* Content */}
         <div className="relative z-10 text-center text-white px-4">
-          <h1 className="text-5xl font-bold mb-4">Our Blog</h1>
+          <h1 className="text-5xl font-bold mb-4">
+            {categoryParam ? `${categoryParam.charAt(0).toUpperCase() + categoryParam.slice(1)} Articles` : 'Our Blog'}
+          </h1>
           <div className="flex items-center justify-center space-x-2 text-sm">
             <Link to="/" className="hover:text-accent-500 transition-colors">Home</Link>
             <span>—</span>
-            <span className="text-accent-500">Blog</span>
+            <Link to="/blog" className={!categoryParam ? 'text-accent-500' : 'hover:text-accent-500 transition-colors'}>Blog</Link>
+            {categoryParam && (
+              <>
+                <span>—</span>
+                <span className="text-accent-500">{categoryParam.charAt(0).toUpperCase() + categoryParam.slice(1)}</span>
+              </>
+            )}
           </div>
         </div>
       </div>
@@ -159,6 +187,27 @@ export default function BlogGrid() {
       <div className="absolute inset-0 pointer-events-none select-none bg-[url('/img/pattern-waves.svg')] opacity-10" />
 
       <div className="relative z-[1] max-w-6xl mx-auto px-4 sm:px-5">
+        {/* Category Filter */}
+        <div className="mb-10 flex flex-wrap justify-center gap-3">
+          <Link 
+            to="/blog" 
+            className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${!categoryParam ? 'bg-accent-500 text-white' : 'bg-white text-gray-700 hover:bg-gray-100'}`}
+          >
+            All Posts
+          </Link>
+          <Link 
+            to="/blog?category=news" 
+            className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${categoryParam === 'news' ? 'bg-accent-500 text-white' : 'bg-white text-gray-700 hover:bg-gray-100'}`}
+          >
+            News
+          </Link>
+          <Link 
+            to="/pr" 
+            className={`px-4 py-2 rounded-full text-sm font-medium transition-colors bg-white text-gray-700 hover:bg-gray-100`}
+          >
+            Press Releases
+          </Link>
+        </div>
         {/* GRID */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
           {visible.map((post) => (

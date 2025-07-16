@@ -71,39 +71,60 @@ const ProjectDetail = () => {
           response = await projectService.getProjectBySlug(id);
         }
         
+        // Handle different API response formats
+        let projectData;
+        
         if (response.data && response.data.data) {
-          // Enhance project data with additional fields if they don't exist
-          const projectData = {
-            ...response.data.data,
-            images: response.data.data.images || [response.data.data.coverImage || fallbackProject.coverImage],
-            specifications: response.data.data.specifications || fallbackProject.specifications,
-            challenge: response.data.data.challenge || fallbackProject.challenge,
-            solution: response.data.data.solution || fallbackProject.solution,
-            results: response.data.data.results || fallbackProject.results,
-          };
-          
-          setProject(projectData);
-          
-          // Fetch related projects from the same category
-          if (projectData.category) {
-            try {
-              const relatedResponse = await projectService.getProjectsByCategory(projectData.category);
-              if (relatedResponse.data && relatedResponse.data.data) {
-                // Filter out the current project and limit to 3 related projects
-                const filteredProjects = relatedResponse.data.data
-                  .filter(p => p._id !== projectData._id)
-                  .slice(0, 3);
-                setRelatedProjects(filteredProjects);
-              }
-            } catch (relatedError) {
-              console.error('Error fetching related projects:', relatedError);
-              // Don't set main error for related projects failure
-            }
-          }
+          // Standard API response format with data property
+          projectData = response.data.data;
+        } else if (response.data && typeof response.data === 'object' && !Array.isArray(response.data)) {
+          // Direct object response format
+          projectData = response.data;
         } else {
-          // If no data in response, use fallback
-          setProject(fallbackProject);
-          setError('Could not load project data from server. Showing sample project.');
+          console.error('Unexpected project data format:', response.data);
+          throw new Error('Invalid project data format');
+        }
+        
+        // Enhance project data with additional fields if they don't exist
+        const enhancedProjectData = {
+          ...projectData,
+          images: projectData.images || [projectData.coverImage || fallbackProject.coverImage],
+          specifications: projectData.specifications || fallbackProject.specifications,
+          challenge: projectData.challenge || fallbackProject.challenge,
+          solution: projectData.solution || fallbackProject.solution,
+          results: projectData.results || fallbackProject.results,
+        };
+        
+        console.log('Project data loaded:', enhancedProjectData.title);
+        setProject(enhancedProjectData);
+          
+        // Fetch related projects from the same category
+        if (enhancedProjectData.category) {
+          try {
+            const relatedResponse = await projectService.getProjectsByCategory(enhancedProjectData.category);
+            console.log('Related projects response:', relatedResponse.data);
+            
+            // Handle different API response formats for related projects
+            let relatedProjectsData = [];
+            
+            if (relatedResponse.data && relatedResponse.data.data && Array.isArray(relatedResponse.data.data)) {
+              relatedProjectsData = relatedResponse.data.data;
+            } else if (relatedResponse.data && Array.isArray(relatedResponse.data)) {
+              relatedProjectsData = relatedResponse.data;
+            }
+            
+            if (relatedProjectsData.length > 0) {
+              // Filter out the current project and limit to 3 related projects
+              const filteredProjects = relatedProjectsData
+                .filter(p => p._id !== enhancedProjectData._id)
+                .slice(0, 3);
+              console.log('Setting related projects:', filteredProjects.length);
+              setRelatedProjects(filteredProjects);
+            }
+          } catch (relatedError) {
+            console.error('Error fetching related projects:', relatedError);
+            // Don't set main error for related projects failure
+          }
         }
       } catch (error) {
         console.error('Error fetching project:', error);

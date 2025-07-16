@@ -66,12 +66,12 @@ export default function Navbar() {
     },
     { 
       label: "Media", 
-      href: "/media",
+      href: "/blog",
       submenu: [
         { label: "Blog", href: "/blog" },
-        { label: "All Posts", href: "/blog/all" },
-        { label: "News", href: "/blog/news" },
-        { label: "Press Releases", href: "/blog/press" }
+        { label: "All Posts", href: "/blog" },
+        { label: "News", href: "/blog?category=news" },
+        { label: "Press Releases", href: "/pr" }
       ]
     },
     { label: "Contact", href: "/contact" },
