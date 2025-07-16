@@ -8,7 +8,7 @@ const FALLBACK_SLIDES = [
   {
     key: 'smart',
     num: '01',
-    railTitle: 'Smart Solar\nTechnology',
+    railTitle: 'What Is Cosmic\nPowertech',
     subtitle: 'Eco-Friendly Energy',
     title: ['Powering A Greener', 'Future With Solar'],
     body: 'Elit himenaeos risus blandit; sociosqu nulla suspendisse. Dignissim urna dapibus mollis efficitur pharetra varius congue.',
@@ -20,7 +20,7 @@ const FALLBACK_SLIDES = [
   {
     key: 'advanced',
     num: '02',
-    railTitle: 'Advanced Solar\nSolutions',
+    railTitle: 'Projects\nOverviews',
     subtitle: 'Intelligent Solution',
     title: ['Next-Gen Solar', 'For Your Home!'],
     body: 'Ante orci diam semper cursus magna sem scelerisque. Amet ligula maximus nam ad class vulputate felis enim.',
@@ -32,7 +32,7 @@ const FALLBACK_SLIDES = [
   {
     key: 'unlimited',
     num: '03',
-    railTitle: 'Unlimited Solar\nPower',
+    railTitle: 'Customise\nSolutions',
     subtitle: 'Cleaner Future',
     title: ['Powering A Greener', 'Future With Solar'],
     body: 'Hendrerit volutpat sectetur metus volutpat memmasse.',
