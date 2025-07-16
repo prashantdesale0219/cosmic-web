@@ -26,8 +26,9 @@ const CustomerSupportChat = () => {
     if (!isOpen && messages.length === 0) {
       setMessages([
         {
+
           id: 1,
-          text: 'नमस्ते! मैं Solar Mitr से बात कर रहा हूँ। आपकी कैसे मदद कर सकता हूँ?',
+          text: 'Hello! I am your Solar Assistant. How can I help you today?',
           sender: 'bot',
           timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
         }
@@ -105,7 +106,7 @@ const CustomerSupportChat = () => {
         setMessages([
           {
             id: 1,
-            text: 'नमस्ते! मैं Solar Mitr से बात कर रहा हूँ। आपकी कैसे मदद कर सकता हूँ?',
+            text: 'Hello! I am your Solar Assistant. How can I help you today?',
             sender: 'bot',
             timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
           }
@@ -120,7 +121,7 @@ const CustomerSupportChat = () => {
         setMessages([
           {
             id: 1,
-            text: 'नमस्ते! मैं Solar Mitr से बात कर रहा हूँ। आपकी कैसे मदद कर सकता हूँ?',
+            text: 'Hello! I am your Solar Assistant. How can I help you today?',
             sender: 'bot',
             timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
           }
@@ -133,7 +134,7 @@ const CustomerSupportChat = () => {
       setMessages([
         {
           id: 1,
-          text: 'नमस्ते! मैं Solar Mitr से बात कर रहा हूँ। आपकी कैसे मदद कर सकता हूँ?',
+          text: 'Hello! I am your Solar Assistant. How can I help you today?',
           sender: 'bot',
           timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
         }
@@ -172,8 +173,8 @@ const CustomerSupportChat = () => {
                 </svg>
               </div>
               <div>
-                <h3 className="font-medium">Solar Mitr</h3>
-                <p className="text-xs opacity-80">सोलर सलाहकार</p>
+                <h3 className="font-medium">Solar Assistant</h3>
+                <p className="text-xs opacity-80">Customer Support</p>
               </div>
             </div>
             <div className="flex items-center">
@@ -237,7 +238,7 @@ const CustomerSupportChat = () => {
                 type="text"
                 value={inputMessage}
                 onChange={(e) => setInputMessage(e.target.value)}
-                placeholder="अपना संदेश यहां टाइप करें..."
+                placeholder="Type your message here..."
                 className="flex-1 border border-gray-300 rounded-l-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-[#cae28e] focus:border-transparent"
               />
               <button 
