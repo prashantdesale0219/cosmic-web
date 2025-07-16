@@ -64,7 +64,7 @@ const CustomerSupportChat = () => {
       // Add bot response
       const newBotMessage = {
         id: messages.length + 2,
-        text: response.data.data.message,
+        text: response.data?.data?.message || response.data?.message || 'I received your message and will get back to you soon.',
         sender: 'bot',
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
       };
@@ -72,8 +72,8 @@ const CustomerSupportChat = () => {
       setMessages(prevMessages => [...prevMessages, newBotMessage]);
       
       // Save conversation ID if it's a new conversation
-      if (!conversationId && response.data.data.conversationId) {
-        setConversationId(response.data.data.conversationId);
+      if (!conversationId && (response.data?.data?.conversationId || response.data?.conversationId)) {
+        setConversationId(response.data?.data?.conversationId || response.data?.conversationId);
       }
     } catch (error) {
       console.error('Error sending message:', error);
@@ -82,7 +82,7 @@ const CustomerSupportChat = () => {
       // Add error message
       const errorMessage = {
         id: messages.length + 2,
-        text: 'Sorry, there was an error processing your request. Please try again later.',
+        text: 'Sorry, there was an error connecting to the chat service. Please try again later.',
         sender: 'bot',
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
       };
@@ -112,6 +112,19 @@ const CustomerSupportChat = () => {
         ]);
       } catch (error) {
         console.error('Error clearing conversation:', error);
+        // Continue with resetting the chat locally even if API call fails
+        setMessages([]);
+        setConversationId(null);
+        
+        // Add welcome message again
+        setMessages([
+          {
+            id: 1,
+            text: 'नमस्ते! मैं Solar Mitr से बात कर रहा हूँ। आपकी कैसे मदद कर सकता हूँ?',
+            sender: 'bot',
+            timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+          }
+        ]);
       }
     } else {
       setMessages([]);

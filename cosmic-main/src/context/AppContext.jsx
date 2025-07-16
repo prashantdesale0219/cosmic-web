@@ -153,7 +153,9 @@ export const AppProvider = ({ children }) => {
     try {
       // Changed from /blogs to /blog-posts to match the API service
       const response = await axios.get(`${API_BASE_URL}/blog-posts`, { params });
-      setBlogPosts(response.data.data);
+      // Ensure blogPosts is always an array
+      const posts = Array.isArray(response.data.data) ? response.data.data : [];
+      setBlogPosts(posts);
       setErrors(prev => ({ ...prev, blog: null }));
     } catch (error) {
       console.error('Error fetching blog posts:', error);

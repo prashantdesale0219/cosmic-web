@@ -181,11 +181,19 @@ export const intelligentSolutionService = {
   reorderSolutions: (items) => api.put('/intelligent-solution/reorder', { items }),
 };
 
+// Create a separate axios instance for chatbot API
+const chatbotApi = axios.create({
+  baseURL: import.meta.env.VITE_CHATBOT_API_URL || 'https://cosmic-support-chatbor.onrender.com',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+});
+
 export const chatService = {
-  sendMessage: (message, conversationId) => api.post('/chat/message', { message, conversationId }),
-  getConversationHistory: (conversationId) => api.get(`/chat/history/${conversationId}`),
-  clearConversation: (conversationId) => api.delete(`/chat/history/${conversationId}`),
-  calculateROI: (monthlyBill, state) => api.post('/chat/roi', { monthlyBill, state }),
+  sendMessage: (message, conversationId) => chatbotApi.post('/api/chat/message', { message, conversationId }),
+  getConversationHistory: (conversationId) => chatbotApi.get(`/api/chat/history/${conversationId}`),
+  clearConversation: (conversationId) => chatbotApi.delete(`/api/chat/history/${conversationId}`),
+  calculateROI: (monthlyBill, state) => chatbotApi.post('/api/chat/roi', { monthlyBill, state }),
 };
 
 export default api;

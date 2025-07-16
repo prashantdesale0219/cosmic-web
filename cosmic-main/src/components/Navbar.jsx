@@ -59,10 +59,7 @@ export default function Navbar() {
     { 
       label: "Calculator", 
       href: "/calculator",
-      submenu: [
-        { label: "Basic Calculator", href: "/calculator" },
-        { label: "Advanced Calculator", href: "/advanced-calculator" }
-      ]
+      
     },
     { 
       label: "Media", 

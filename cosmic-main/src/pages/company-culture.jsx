@@ -43,7 +43,7 @@ const CompanyCulture = () => {
         className="relative bg-cover bg-center h-64 sm:h-80 md:h-[300px] flex items-center justify-center"
         style={{
           backgroundImage:
-            "url('https://zolar.wpengine.com/wp-content/uploads/2025/01/zolar-breadcrumb-bg.jpg')",
+            "url('/companyculture.jpeg')",
         }}
       >
         <div className="absolute inset-0 bg-black/50" />
