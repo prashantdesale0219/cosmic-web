@@ -90,13 +90,6 @@ export default function PressReleasePage() {
         {/* Content */}
         <div className="relative z-10 text-center text-white px-4">
           <h1 className="text-5xl font-bold mb-4">Press Releases</h1>
-          <div className="flex items-center justify-center space-x-2 text-sm">
-            <Link to="/" className="hover:text-[#cae28e] transition-colors">Home</Link>
-            <span>—</span>
-            <Link to="/blog" className="hover:text-[#cae28e] transition-colors">Blog</Link>
-            <span>—</span>
-            <span className="text-[#cae28e]">Press Releases</span>
-          </div>
         </div>
       </div>
 

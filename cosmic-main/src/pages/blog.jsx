@@ -166,17 +166,6 @@ export default function BlogGrid() {
           <h1 className="text-5xl font-bold mb-4">
             {categoryParam ? `${categoryParam.charAt(0).toUpperCase() + categoryParam.slice(1)} Articles` : 'Our Blog'}
           </h1>
-          <div className="flex items-center justify-center space-x-2 text-sm">
-            <Link to="/" className="hover:text-accent-500 transition-colors">Home</Link>
-            <span>—</span>
-            <Link to="/blog" className={!categoryParam ? 'text-accent-500' : 'hover:text-accent-500 transition-colors'}>Blog</Link>
-            {categoryParam && (
-              <>
-                <span>—</span>
-                <span className="text-accent-500">{categoryParam.charAt(0).toUpperCase() + categoryParam.slice(1)}</span>
-              </>
-            )}
-          </div>
         </div>
       </div>
 

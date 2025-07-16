@@ -160,17 +160,6 @@ const DirectorDesk = () => {
         <div className="absolute inset-0 bg-black/50" />
         <div className="relative z-10 text-center text-white px-4">
           <h1 className="text-4xl sm:text-5xl font-bold mb-4">Director's Desk</h1>
-          <nav className="flex items-center justify-center space-x-2 text-sm">
-            <Link to="/" className="hover:text-accent-500 transition">
-              Home
-            </Link>
-            <span>—</span>
-            <Link to="/about" className="hover:text-accent-500 transition">
-              About
-            </Link>
-            <span>—</span>
-            <span className="text-accent-500">Director's Desk</span>
-          </nav>
         </div>
       </motion.header>
 

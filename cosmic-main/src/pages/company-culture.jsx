@@ -49,17 +49,6 @@ const CompanyCulture = () => {
         <div className="absolute inset-0 bg-black/50" />
         <div className="relative z-10 text-center text-white px-4">
           <h1 className="text-4xl sm:text-5xl font-bold mb-4">Company Culture</h1>
-          <nav className="flex items-center justify-center space-x-2 text-sm">
-            <Link to="/" className="hover:text-[#9fc22f] transition">
-              Home
-            </Link>
-            <span>—</span>
-            <Link to="/about" className="hover:text-[#9fc22f] transition">
-              About
-            </Link>
-            <span>—</span>
-            <span className="text-[#9fc22f]">Company Culture</span>
-          </nav>
         </div>
       </motion.header>
 

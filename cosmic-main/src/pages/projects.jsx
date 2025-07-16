@@ -211,7 +211,7 @@ const ProjectsPage = () => {
           <p className="text-gray-600 max-w-2xl mx-auto">Our portfolio of completed solar installations showcases our commitment to quality and innovation</p>
         </div>
         
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-2 gap-8">
           {loading ? (
             // Loading skeleton
             [...Array(6)].map((_, idx) => (
@@ -234,7 +234,7 @@ const ProjectsPage = () => {
                   <img
                     src={project.featuredImage || project.image}
                     alt={project.title || `Project ${idx + 1}`}
-                    className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"
+                    className="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                 </div>
                 <div className="p-5">
@@ -260,7 +260,7 @@ const ProjectsPage = () => {
                   <img
                   src={src}
                   alt={`project-${idx}`}
-                  className="w-full h-56 md:h-64 object-cover transition-transform duration-500 group-hover:scale-110"
+                  className="w-full h-72 md:h-80 object-cover transition-transform duration-500 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#13181f]/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
                   <Link to={`/projects/${idx}`} className="bg-accent-400 hover:bg-accent-500 text-accent-950 px-4 py-2 rounded-full text-sm font-medium shadow-lg transition-all duration-300">View Details</Link>
