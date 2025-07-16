@@ -4,22 +4,22 @@ import { FaArrowRight, FaCalculator, FaSolarPanel, FaFileAlt, FaPhoneAlt } from 
 
 const quickLinks = [
   {
-    title: 'Solar Calculator',
+    title: 'Basic Calculator',
     description: 'Estimate your potential savings and system size with our easy-to-use calculator.',
     icon: <FaCalculator className="text-3xl text-[#cae28e]" />,
     href: '/calculator',
+  },
+  {
+    title: 'Advanced Calculator',
+    description: 'Get detailed financial projections and environmental impact analysis with our advanced calculator.',
+    icon: <FaCalculator className="text-3xl text-[#cae28e]" />,
+    href: '/advanced-calculator',
   },
   {
     title: 'Products Catalog',
     description: 'Browse our complete range of solar panels, inverters, batteries, and accessories.',
     icon: <FaSolarPanel className="text-3xl text-[#cae28e]" />,
     href: '/products',
-  },
-  {
-    title: 'Free Quote',
-    description: 'Request a personalized quote for your home or business solar installation.',
-    icon: <FaFileAlt className="text-3xl text-[#cae28e]" />,
-    href: '/quote',
   },
   {
     title: 'Contact Us',

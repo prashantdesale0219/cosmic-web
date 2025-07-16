@@ -12,6 +12,7 @@ const Calculator = () => {
     roofArea: '',
     sunlightHours: 5,
     shadingLevel: 'none',
+    panelsType: 'standard', // Added panels type field with default value
   });
 
   const [showResult, setShowResult] = useState(false);
@@ -57,11 +58,29 @@ const Calculator = () => {
     'significant': 0.6,
   }[formData.shadingLevel];
 
-  const monthlyKwh = monthlyBill / 8;
-  const systemSizeKw = (monthlyKwh / (30 * sunlightHours)) / shadingEfficiency;
-  const panels = Math.floor((systemSizeKw * 1000) / 350);
-  const areaNeeded = systemSizeKw * 10;
-  const investment = systemSizeKw * 1000 * costPerWatt;
+  // Simplified calculation for system size based on monthly bill
+  // Calculate a range by dividing the bill by 1100 and 1000
+  const systemSizeKw_lower = monthlyBill / 1100;
+  const systemSizeKw_upper = monthlyBill / 1000;
+
+  // Round to 1 decimal place for cleaner display
+  const roundedSystemSizeKw_lower = Math.round(systemSizeKw_lower * 10) / 10;
+  const roundedSystemSizeKw_upper = Math.round(systemSizeKw_upper * 10) / 10;
+
+  // Use the average of the range for subsequent calculations
+  const averageSystemSizeKw = (roundedSystemSizeKw_lower + roundedSystemSizeKw_upper) / 2;
+
+  // For backward compatibility, still calculate monthlyKwh
+  const monthlyKwh = monthlyBill / 8.7;
+  const panels = Math.floor((averageSystemSizeKw * 1000) / 350);
+  const areaNeeded = averageSystemSizeKw * 10;
+  
+  // Calculate investment range based on system size range
+  const investment_lower = systemSizeKw_lower * 55000;
+  const investment_upper = systemSizeKw_upper * 55000;
+  // Use average investment for calculations that need a single value
+  const investment = (investment_lower + investment_upper) / 2;
+  
   const annualReturn = monthlyBill * 12 * 0.9;
   const totalReturns = annualReturn * years;
   const totalValue = investment + totalReturns;
@@ -89,6 +108,7 @@ const Calculator = () => {
 
   const breakdown = Array.from({ length: years }, (_, i) => {
     const yr = i + 1;
+    // Use average investment for year-by-year breakdown
     const invest = (investment / years) * yr;
     const ret = annualReturn * yr;
     const co2Saved = annualCo2Savings * yr;
@@ -169,6 +189,21 @@ const Calculator = () => {
                     required
                   />
                 </div>
+                
+                <div>
+                  <label className="block mb-1 md:mb-2 text-xs md:text-sm font-medium text-gray-700">Panels Type</label>
+                  <select 
+                    name="panelsType" 
+                    value={formData.panelsType} 
+                    onChange={handleChange} 
+                    className="w-full border border-gray-300 px-3 md:px-4 py-2 md:py-3 rounded-lg focus:ring-2 focus:ring-accent-500 focus:border-accent-500 transition-all text-sm md:text-base"
+                  >
+                    <option value="standard">Standard Panels</option>
+                    <option value="premium">Premium Panels</option>
+                    <option value="highEfficiency">High Efficiency Panels</option>
+                    <option value="bifacial">Bifacial Panels</option>
+                  </select>
+                </div>
               </div>
 
               <button 
@@ -185,7 +220,7 @@ const Calculator = () => {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                 <div>
-                  <label className="block mb-1 md:mb-2 text-xs md:text-sm font-medium text-gray-700">Available Roof Area (sq.m)</label>
+                  <label className="block mb-1 md:mb-2 text-xs md:text-sm font-medium text-gray-700">Available Roof Area (sq.ft)</label>
                   <input 
                     type="number" 
                     name="roofArea" 
@@ -308,13 +343,27 @@ const Calculator = () => {
             
             <div className="bg-accent-950 text-white p-3 md:p-6 rounded-xl">
               <h3 className="text-lg md:text-xl font-semibold mb-2 md:mb-4">Ready to Harness Solar Power?</h3>
-              <p className="text-xs md:text-sm mb-3 md:mb-4">Fill out the form above to calculate your solar potential and take the first step towards energy independence and sustainability.</p>
-              <div className="flex items-center text-accent-500">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 md:h-5 md:w-5 mr-1 md:mr-2" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clipRule="evenodd" />
-                </svg>
-                <span className="text-xs md:text-sm">Accurate calculations based on industry standards and local conditions</span>
-              </div>
+              <p className="text-xs md:text-base text-gray-700 mb-2 md:mb-4">By installing a {averageSystemSizeKw.toFixed(2)} kW solar system, over {years} years you will:</p>
+              <ul className="space-y-1 md:space-y-3">
+                <li className="flex items-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 md:h-5 md:w-5 text-accent-500 mr-1 md:mr-2" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                  <span className="text-xs md:text-base">Save ₹{Math.round(totalReturns).toLocaleString()} on electricity bills</span>
+                </li>
+                <li className="flex items-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 md:h-5 md:w-5 text-accent-500 mr-1 md:mr-2" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                  <span className="text-xs md:text-base">Prevent {Math.round(totalCo2Savings).toLocaleString()} kg of CO₂ emissions</span>
+                </li>
+                <li className="flex items-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 md:h-5 md:w-5 text-accent-500 mr-1 md:mr-2" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                  <span className="text-xs md:text-base">Have the same environmental impact as planting {totalTreesEquivalent} trees</span>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
@@ -332,12 +381,12 @@ const Calculator = () => {
               {/* Key Metrics */}
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 md:gap-4 mb-4 md:mb-8">
                 <div className={`bg-accent-50 p-2 md:p-6 rounded-xl border border-accent-500/30 flex flex-col items-center text-center transform transition-all duration-700 ${animationComplete ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`} style={{transitionDelay: '100ms'}}>
-                  <div className="text-accent-950 text-lg md:text-4xl font-bold mb-0.5 md:mb-2">{systemSizeKw.toFixed(2)} kW</div>
+                  <div className="text-accent-950 text-lg md:text-4xl font-bold mb-0.5 md:mb-2">{`${roundedSystemSizeKw_lower} - ${roundedSystemSizeKw_upper}`} kW</div>
                   <div className="text-gray-600 text-xs md:text-sm">Recommended System Size</div>
                 </div>
                 
                 <div className={`bg-accent-50 p-2 md:p-6 rounded-xl border border-accent-500/30 flex flex-col items-center text-center transform transition-all duration-700 ${animationComplete ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`} style={{transitionDelay: '200ms'}}>
-                  <div className="text-accent-950 text-lg md:text-4xl font-bold mb-0.5 md:mb-2">₹{Math.round(investment).toLocaleString()}</div>
+                  <div className="text-accent-950 text-lg md:text-4xl font-bold mb-0.5 md:mb-2">₹{Math.round(investment_lower).toLocaleString()} - ₹{Math.round(investment_upper).toLocaleString()}</div>
                   <div className="text-gray-600 text-xs md:text-sm">Estimated Investment</div>
                 </div>
                 
@@ -540,7 +589,7 @@ const Calculator = () => {
 
                   <div className="mt-3 md:mt-8 p-3 md:p-6 bg-accent-50 rounded-xl border border-accent-500/30">
                     <h3 className="text-lg md:text-xl font-semibold text-accent-950 mb-3 md:mb-4 font-space-grotesk">Your Impact Summary</h3>
-                    <p className="text-xs md:text-base text-gray-700 mb-2 md:mb-4">By installing a {systemSizeKw.toFixed(2)} kW solar system, over {years} years you will:</p>
+                    <p className="text-xs md:text-base text-gray-700 mb-2 md:mb-4">By installing a {averageSystemSizeKw.toFixed(2)} kW solar system, over {years} years you will:</p>
                     <ul className="space-y-1 md:space-y-3">
                       <li className="flex items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 md:h-5 md:w-5 text-accent-500 mr-1 md:mr-2" viewBox="0 0 20 20" fill="currentColor">

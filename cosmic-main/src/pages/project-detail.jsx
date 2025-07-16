@@ -1,22 +1,67 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import { ArrowLeft, FileText, Heart, Share2, Facebook, Twitter, Linkedin, Star, Info, Check, Shield, Truck, RefreshCw } from 'lucide-react';
+import { ArrowLeft, FileText, Heart, Share2, Facebook, Twitter, Linkedin, Star, Info, Check, Shield, Truck, RefreshCw, Calendar, MapPin, User, Clock, Zap } from 'lucide-react';
 import { projectService } from '../services/api';
+import { useAppContext } from '../context/AppContext';
 
 const ProjectDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { apiBaseUrl } = useAppContext();
   const [project, setProject] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [selectedImage, setSelectedImage] = useState(0);
   const [activeTab, setActiveTab] = useState('description');
   const [relatedProjects, setRelatedProjects] = useState([]);
+  const [galleryView, setGalleryView] = useState(false);
+
+  // Sample fallback project data in case API fails
+  const fallbackProject = {
+    _id: 'fallback-project',
+    title: 'Solar Installation Project',
+    slug: 'solar-installation-project',
+    description: 'This state-of-the-art solar installation provides clean, renewable energy for residential use. The system includes high-efficiency solar panels, inverters, and a monitoring system that allows the homeowner to track energy production in real-time.',
+    category: 'Residential',
+    location: 'Gujarat, India',
+    completionDate: new Date().toISOString(),
+    client: 'Residential Customer',
+    coverImage: 'https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1744&q=80',
+    images: [
+      'https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1744&q=80',
+      'https://images.unsplash.com/photo-1611365892117-00d23f8302c1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80',
+      'https://images.unsplash.com/photo-1613665813446-82a78c468a1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1738&q=80',
+    ],
+    specifications: [
+      '5kW system capacity',
+      '15 high-efficiency solar panels',
+      'Grid-tied inverter system',
+      'Monitoring system with mobile app',
+      '25-year warranty on panels',
+    ],
+    challenge: 'The client needed a renewable energy solution that would significantly reduce their electricity bills while being aesthetically pleasing and not taking up valuable yard space.',
+    solution: 'We designed a custom rooftop solar system that maximizes energy production while maintaining the homes aesthetic appeal. The system was installed with minimal disruption to the clients daily life.',
+    results: 'The system produces approximately 7,500 kWh annually, covering about 80% of the households electricity needs. The client is expected to save ₹75,000 per year on electricity bills, with a payback period of approximately 5 years.',
+    testimonial: {
+      content: 'The team was professional from start to finish. They explained everything clearly, installed the system quickly, and the results have exceeded our expectations. Our electricity bills have dropped dramatically!',
+      name: 'Rajesh Patel',
+      position: 'Homeowner',
+      company: '',
+      avatar: 'https://randomuser.me/api/portraits/men/32.jpg',
+    },
+    systemSize: '5 kW',
+    annualProduction: '7,500 kWh',
+    co2Reduction: '5.3 tons annually',
+    installationTime: '3 days',
+    projectManager: 'Amit Sharma',
+  };
 
   // Fetch project data
   useEffect(() => {
     const fetchProjectData = async () => {
       try {
         setLoading(true);
+        setError(null);
         let response;
         
         // Check if id is a MongoDB ObjectId or a slug
@@ -27,22 +72,43 @@ const ProjectDetail = () => {
         }
         
         if (response.data && response.data.data) {
-          setProject(response.data.data);
+          // Enhance project data with additional fields if they don't exist
+          const projectData = {
+            ...response.data.data,
+            images: response.data.data.images || [response.data.data.coverImage || fallbackProject.coverImage],
+            specifications: response.data.data.specifications || fallbackProject.specifications,
+            challenge: response.data.data.challenge || fallbackProject.challenge,
+            solution: response.data.data.solution || fallbackProject.solution,
+            results: response.data.data.results || fallbackProject.results,
+          };
+          
+          setProject(projectData);
           
           // Fetch related projects from the same category
-          if (response.data.data.category) {
-            const relatedResponse = await projectService.getProjectsByCategory(response.data.data.category);
-            if (relatedResponse.data && relatedResponse.data.data) {
-              // Filter out the current project and limit to 3 related projects
-              const filteredProjects = relatedResponse.data.data
-                .filter(p => p._id !== response.data.data._id)
-                .slice(0, 3);
-              setRelatedProjects(filteredProjects);
+          if (projectData.category) {
+            try {
+              const relatedResponse = await projectService.getProjectsByCategory(projectData.category);
+              if (relatedResponse.data && relatedResponse.data.data) {
+                // Filter out the current project and limit to 3 related projects
+                const filteredProjects = relatedResponse.data.data
+                  .filter(p => p._id !== projectData._id)
+                  .slice(0, 3);
+                setRelatedProjects(filteredProjects);
+              }
+            } catch (relatedError) {
+              console.error('Error fetching related projects:', relatedError);
+              // Don't set main error for related projects failure
             }
           }
+        } else {
+          // If no data in response, use fallback
+          setProject(fallbackProject);
+          setError('Could not load project data from server. Showing sample project.');
         }
       } catch (error) {
         console.error('Error fetching project:', error);
+        setProject(fallbackProject);
+        setError('Failed to load project data. Showing sample project.');
       } finally {
         setLoading(false);
       }
@@ -50,6 +116,10 @@ const ProjectDetail = () => {
 
     if (id) {
       fetchProjectData();
+    } else {
+      // If no ID provided, use fallback
+      setProject(fallbackProject);
+      setLoading(false);
     }
   }, [id]);
 
@@ -62,6 +132,11 @@ const ProjectDetail = () => {
   const formatDate = (dateString) => {
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
     return new Date(dateString).toLocaleDateString(undefined, options);
+  };
+
+  // Toggle gallery view
+  const toggleGalleryView = () => {
+    setGalleryView(!galleryView);
   };
 
   if (loading) {
@@ -91,7 +166,7 @@ const ProjectDetail = () => {
         <p className="mt-2 text-gray-600">The project you're looking for doesn't exist or has been removed.</p>
         <button 
           onClick={() => navigate('/projects')} 
-          className="mt-6 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-yellow-green-600 hover:bg-yellow-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-green-500"
+          className="mt-6 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-accent-600 hover:bg-accent-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-500"
         >
           <ArrowLeft className="mr-2 h-4 w-4" /> Back to Projects
         </button>
@@ -101,22 +176,36 @@ const ProjectDetail = () => {
 
   return (
     <div className="bg-white">
+      {/* Error notification */}
+      {error && (
+        <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 max-w-7xl mx-auto my-4">
+          <div className="flex">
+            <div className="flex-shrink-0">
+              <Info className="h-5 w-5 text-yellow-400" aria-hidden="true" />
+            </div>
+            <div className="ml-3">
+              <p className="text-sm text-yellow-700">{error}</p>
+            </div>
+          </div>
+        </div>
+      )}
+      
       {/* Breadcrumb */}
       <nav className="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8">
         <ol className="flex items-center space-x-2 text-sm text-gray-500">
           <li>
-            <Link to="/" className="hover:text-yellow-green-600">Home</Link>
+            <Link to="/" className="hover:text-accent-600">Home</Link>
           </li>
           <li>
             <span className="mx-2">/</span>
           </li>
           <li>
-            <Link to="/projects" className="hover:text-yellow-green-600">Projects</Link>
+            <Link to="/projects" className="hover:text-accent-600">Projects</Link>
           </li>
           <li>
             <span className="mx-2">/</span>
           </li>
-          <li className="font-medium text-yellow-green-600 truncate">{project.title}</li>
+          <li className="font-medium text-accent-600 truncate">{project.title}</li>
         </ol>
       </nav>
 
@@ -124,7 +213,7 @@ const ProjectDetail = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6">
         <button 
           onClick={() => navigate('/projects')} 
-          className="inline-flex items-center px-3 py-1.5 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-green-500"
+          className="inline-flex items-center px-3 py-1.5 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-500"
         >
           <ArrowLeft className="mr-1 h-4 w-4" /> Back to Projects
         </button>

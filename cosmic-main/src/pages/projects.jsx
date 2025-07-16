@@ -245,7 +245,7 @@ const ProjectsPage = () => {
                   className="w-full h-56 md:h-64 object-cover transition-transform duration-500 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#13181f]/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                  <button className="bg-accent-400 hover:bg-accent-500 text-accent-950 px-4 py-2 rounded-full text-sm font-medium shadow-lg transition-all duration-300">View Details</button>
+                  <Link to={`/projects/${idx}`} className="bg-accent-400 hover:bg-accent-500 text-accent-950 px-4 py-2 rounded-full text-sm font-medium shadow-lg transition-all duration-300">View Details</Link>
                 </div>
               </div>
               <div className="p-5">
@@ -256,9 +256,9 @@ const ProjectsPage = () => {
                     <span className="mr-3">{2020 + idx} • </span>
                     <span>{idx % 2 === 0 ? 'Residential' : 'Commercial'}</span>
                   </div>
-                  <div className="text-accent-600 hover:text-accent-700 cursor-pointer text-sm font-medium flex items-center">
-                    Learn more <FiArrowRight className="ml-1" />
-                  </div>
+                  <Link to={`/projects/${idx}`} className="text-accent-600 hover:text-accent-700 cursor-pointer text-sm font-medium flex items-center">
+                    View Details <FiArrowRight className="ml-1" />
+                  </Link>
                 </div>
               </div>
             </div>
@@ -267,7 +267,7 @@ const ProjectsPage = () => {
         </div>
         
         <div className="text-center mt-12">
-          <button className="border-2 border-accent-400 text-accent-600 hover:bg-accent-400 hover:text-accent-950 px-6 py-3 rounded-full font-medium transition-colors duration-300 shadow-md">View All Projects</button>
+          <Link to="/projects" className="border-2 border-accent-400 text-accent-600 hover:bg-accent-400 hover:text-accent-950 px-6 py-3 rounded-full font-medium transition-colors duration-300 shadow-md inline-block">View All Projects</Link>
         </div>
       </section>
 
@@ -296,7 +296,7 @@ const ProjectsPage = () => {
           </div>
           
           <div className="mt-12 text-center">
-            <button className="bg-accent-400 hover:bg-accent-500 text-accent-950 px-6 py-3 rounded-full font-medium transition-colors duration-300 shadow-md">Learn More About Our Process</button>
+            <Link to="/services" className="bg-accent-400 hover:bg-accent-500 text-accent-950 px-6 py-3 rounded-full font-medium transition-colors duration-300 shadow-md inline-block">Learn More About Our Process</Link>
           </div>
         </div>
       </section>

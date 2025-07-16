@@ -52,10 +52,13 @@ const awards = [
   },
 ];
 
+
+
 /* ------------------------------------------------------------------ */
 /*  COMPONENT                                                         */
 /* ------------------------------------------------------------------ */
 const AwardsTimeline = () => {
+
   /* ---------------- RENDER ---------------- */
   return (
     <div className="mb-10">
@@ -70,6 +73,9 @@ const AwardsTimeline = () => {
       </div>
 
       {/* Custom CSS Slider */}
+
+
+      {/* Awards Slider */}
       <div className="mt-10 md:mt-16 px-4 md:px-8 lg:px-16">
         <style>
           {`

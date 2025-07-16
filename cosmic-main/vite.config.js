@@ -9,13 +9,13 @@ export default defineConfig({
     port: 5174,
     proxy: {
       '/api': {
-        target: 'http://localhost:5000',
+        target: 'http://localhost:8000',
         changeOrigin: true,
         secure: false,
-        rewrite: (path) => path
+        rewrite: (path) => path.replace(/^\/api/, '/api')
       },
       '/uploads': {
-        target: 'http://localhost:5000',
+        target: 'http://localhost:8000',
         changeOrigin: true,
         secure: false
       }

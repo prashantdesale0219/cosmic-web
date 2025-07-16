@@ -1,5 +1,5 @@
 /*  src/pages/Home.jsx  */
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Hero from "../components/Hero";
 // SmartEnergySolutions component removed
@@ -18,11 +18,121 @@ import { useAppContext } from "../context/AppContext";
 import {
   CalculatorIcon,
   ClipboardDocumentCheckIcon,
+  XMarkIcon,
   WrenchScrewdriverIcon,
   ShieldCheckIcon,
+  CalendarDaysIcon,
+  EyeIcon,
 } from "@heroicons/react/24/outline";
 import { ArrowRightIcon } from "@heroicons/react/24/solid";
 import { motion } from "framer-motion";
+
+// NewsCard Component with Popup functionality
+const NewsCard = ({ title, image, logo, date, excerpt, content }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  
+  const openPopup = () => setIsOpen(true);
+  const closePopup = () => setIsOpen(false);
+  
+  return (
+    <>
+      {/* News Card - Music Player Style */}
+       <motion.div 
+         className="bg-primary-50 backdrop-blur-sm rounded-lg overflow-hidden border border-primary-100 hover:border-primary-200 shadow-sm hover:shadow-md transition-all duration-300 flex items-center h-[70px] w-full px-4"
+         initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
+          whileHover={{ y: -2, scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
+       >
+          {/* Logo */}
+          <div className="bg-primary-100 p-2 rounded-full shadow-sm mr-3 flex-shrink-0">
+            <img src={logo} alt="Company Logo" className="w-8 h-8" />
+          </div>
+          
+          {/* Title and Date */}
+          <div className="flex-grow overflow-hidden">
+            <h3 className="font-semibold text-primary-700 text-sm line-clamp-1">{title}</h3>
+            <div className="flex items-center text-primary-500 text-xs mt-0.5">
+              <CalendarDaysIcon className="w-3 h-3 mr-1" />
+              <span>{date}</span>
+            </div>
+          </div>
+          
+          {/* View Button */}
+          <button 
+            onClick={openPopup}
+            className="ml-auto bg-accent-500 hover:bg-accent-600 text-white rounded-full px-5 py-1.5 text-xs font-medium transition-colors flex items-center group"
+          >
+            <EyeIcon className="w-3.5 h-3.5 mr-1" />
+            <span>View</span>
+          </button>
+       </motion.div>
+      
+      {/* Popup Modal */}
+      {isOpen && (
+        <div className="fixed inset-0 bg-primary-900/90 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
+          <motion.div 
+            className="bg-white rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.9 }}
+            transition={{ type: "spring", damping: 20, stiffness: 300 }}
+          >
+            {/* Popup Header */}
+            <div className="relative h-72 overflow-hidden">
+              <img 
+                src={image} 
+                alt={title} 
+                className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-primary-900/90 to-transparent"></div>
+              
+              {/* Close Button */}
+              <button 
+                onClick={closePopup}
+                className="absolute top-4 right-4 bg-white/90 rounded-full p-1.5 shadow-lg hover:bg-white transition-colors z-10"
+              >
+                <XMarkIcon className="w-5 h-5 text-primary-700" />
+              </button>
+              
+              {/* Title Overlay */}
+              <div className="absolute bottom-4 left-4 right-4">
+                <div className="flex items-center mb-2">
+                  <div className="bg-primary-50 p-1.5 rounded-full shadow-md mr-2 animate-pulse-slow">
+                    <img src={logo} alt="Company Logo" className="w-5 h-5" />
+                  </div>
+                  <span className="text-white text-sm font-medium">{date}</span>
+                </div>
+                <h2 className="text-white text-2xl font-bold drop-shadow-md">{title}</h2>
+              </div>
+            </div>
+            
+            {/* Popup Content */}
+            <div className="p-6">
+              <p className="text-primary-700 leading-relaxed mb-4">{content}</p>
+              
+              {/* Action Buttons */}
+              <div className="mt-8 flex justify-end space-x-4">
+                <button 
+                  onClick={closePopup}
+                  className="px-5 py-2.5 border border-primary-200 rounded-lg text-primary-600 hover:bg-primary-50 transition-colors font-medium"
+                >
+                  Close
+                </button>
+                <button className="px-5 py-2.5 bg-accent-500 text-white rounded-lg hover:bg-accent-600 transition-colors flex items-center font-medium group">
+                  Read Full Article
+                  <ArrowRightIcon className="w-4 h-4 ml-1.5 group-hover:translate-x-1 transition-transform" />
+                </button>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      )}
+    </>
+  );
+};
 
 const Home = () => {
   // Get data and functions from context
@@ -192,7 +302,6 @@ const Home = () => {
         </div>
 
        
-        {/* CO2 Emission Reduction section removed */}
 
         {/* ---------- Green Future Section ---------- */}
         <div className="mt-8 sm:mt-12 md:mt-16">
@@ -239,7 +348,7 @@ const Home = () => {
                 </motion.button>
               </div>
               
-              {/* Right Image Column */}
+              {/* Right News Cards Column */}
               <div className="order-1 md:order-2 col-span-12 md:col-span-7 flex justify-center md:justify-end overflow-hidden">
                 <motion.div
                   initial={{ opacity: 0, y: 50 }}
@@ -248,42 +357,46 @@ const Home = () => {
                   viewport={{ once: true, amount: 0.3 }}
                   className="relative w-full h-full"
                 >
-                  <div className="relative w-full h-full flex items-center justify-center">
-                    {/* Newspaper/Magazine style image with animation */}
-                    <motion.div 
-                      className="relative w-full max-w-lg overflow-hidden rounded-lg shadow-2xl"
-                      initial={{ rotate: 5, scale: 0.95 }}
-                      whileInView={{ rotate: 0, scale: 1 }}
-                      transition={{ duration: 0.6, ease: "easeOut" }}
-                      whileHover={{ 
-                        scale: 1.05,
-                        boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
-                        transition: { duration: 0.3 }
-                      }}
-                    >
-                      <motion.img 
-                        src="/newsimage.png" 
-                        alt="Solar News" 
-                        className="w-full h-auto rounded"
-                        initial={{ filter: "brightness(0.9)" }}
-                        whileHover={{ 
-                          filter: "brightness(1.1)",
-                          transition: { duration: 0.3 }
-                        }}
-                        animate={{
-                          scale: [1, 1.02, 1],
-                        }}
-                        transition={{
-                          repeat: Infinity,
-                          repeatType: "reverse",
-                          duration: 2,
-                        }}
-                      />
-                    </motion.div>
+                  <div className="flex flex-col space-y-4 w-full py-2" style={{ width: "100%" }}>
+                    {/* News Card 1 */}
+                    <NewsCard 
+                      title="Solar Energy Breakthrough" 
+                      image="/newsimage.png"
+                      logo="/logo.png"
+                      date="June 15, 2023"
+                      excerpt="New solar panel technology increases efficiency by 25%, making renewable energy more accessible."
+                      content="Researchers have developed a groundbreaking new solar panel technology that increases efficiency by 25% while reducing manufacturing costs. This innovation uses a novel material composition that captures a broader spectrum of light, even in low-light conditions. The development is expected to accelerate the adoption of solar energy across residential and commercial sectors, making renewable energy more accessible and affordable. Industry experts predict this could be a game-changer for regions with less consistent sunlight."
+                    />
                     
-                    {/* Decorative elements */}
-                    <div className="absolute top-10 right-10 w-20 h-20 bg-accent-500 rounded-full opacity-20 blur-xl"></div>
-                    <div className="absolute bottom-10 left-10 w-32 h-32 bg-primary-500 rounded-full opacity-10 blur-xl"></div>
+                    {/* News Card 2 */}
+                    <NewsCard 
+                      title="Government Solar Subsidies" 
+                      image="/newsimage.jpeg"
+                      logo="/logo.png"
+                      date="May 28, 2023"
+                      excerpt="New government initiative offers substantial subsidies for residential solar installations."
+                      content="The Indian government has announced a comprehensive new subsidy program aimed at boosting residential solar adoption. The initiative will cover up to 40% of installation costs for households that switch to solar power. This program is part of the country's broader commitment to increasing renewable energy capacity and achieving energy independence. Officials stated that the subsidies will be available starting next month, with a streamlined application process designed to minimize bureaucratic hurdles. The program aims to add 5GW of residential solar capacity within the next three years."
+                    />
+                    
+                    {/* News Card 3 */}
+                    <NewsCard 
+                      title="Corporate Solar Rises" 
+                      image="/solar-panels.jpg"
+                      logo="/logo.png"
+                      date="April 10, 2023"
+                      excerpt="Major corporations pledge to power operations with 100% renewable energy by 2025."
+                      content="Several major Indian corporations have announced ambitious plans to transition to 100% renewable energy by 2025. The coalition, which includes leaders from manufacturing, technology, and service sectors, will collectively invest over ₹15,000 crores in solar infrastructure. This corporate initiative is expected to create thousands of green jobs while significantly reducing carbon emissions. The companies will implement a combination of rooftop solar installations, solar parks, and power purchase agreements with renewable energy providers to achieve their targets."
+                    />
+                    
+                    {/* News Card 4 */}
+                    <NewsCard 
+                      title="Solar Storage Solutions " 
+                      image="/quality.jpg"
+                      logo="/logo.png"
+                      date="March 5, 2023"
+                      excerpt="New battery technology extends solar energy storage capacity, solving intermittency challenges."
+                      content="A breakthrough in battery technology promises to solve one of solar energy's biggest challenges: storage. The new lithium-silicon batteries offer twice the energy density of conventional lithium-ion batteries at a projected 30% lower cost when mass-produced. This development allows solar energy systems to store excess power more efficiently for use during nighttime or cloudy periods. Early tests show the batteries maintain 90% of their capacity even after 5,000 charge cycles, representing a significant improvement in longevity and reliability for solar storage solutions."
+                    />
                   </div>
                 </motion.div>
               </div>

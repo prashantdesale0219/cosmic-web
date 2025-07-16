@@ -19,6 +19,7 @@ import About from './pages/about'
 import Services from './pages/services'
 import Projects from './pages/projects'
 import Calculator from './pages/calculator'
+import AdvancedCalculator from './pages/advanced-calculator'
 import Contact from './pages/contact'
 import Blog from './pages/blog'
 import BlogDetail from './pages/blogDetail'
@@ -70,6 +71,7 @@ function AppContent() {
                 <Route path="/projects" element={<Projects />} />
                 <Route path="/projects/:id" element={<ProjectDetail />} />
                 <Route path="/calculator" element={<Calculator />} />
+                <Route path="/advanced-calculator" element={<AdvancedCalculator />} />
                 <Route path="/blog" element={<Blog />} />
                 <Route path="/blog/:id" element={<BlogDetail />} />
                 <Route path="/pr" element={<PressRelease />} />

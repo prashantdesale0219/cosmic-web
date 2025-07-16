@@ -145,12 +145,18 @@ const DirectorDesk = () => {
         initial="hidden"
         animate="visible"
         variants={fadeUpVariant}
-        className="relative bg-cover bg-center h-64 sm:h-80 md:h-[300px] flex items-center justify-center"
-        style={{
-          backgroundImage:
-            "url('https://zolar.wpengine.com/wp-content/uploads/2025/01/zolar-breadcrumb-bg.jpg')",
-        }}
+        className="relative h-64 sm:h-80 md:h-[800px] flex items-center justify-center overflow-hidden"
       >
+        <video 
+          className="absolute inset-0 w-full h-full object-cover" 
+          autoPlay 
+          muted 
+          loop
+          playsInline
+        >
+          <source src="/directordesk.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
         <div className="absolute inset-0 bg-black/50" />
         <div className="relative z-10 text-center text-white px-4">
           <h1 className="text-4xl sm:text-5xl font-bold mb-4">Director's Desk</h1>

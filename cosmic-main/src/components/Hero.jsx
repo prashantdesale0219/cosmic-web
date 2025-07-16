@@ -288,26 +288,50 @@ export default function Hero() {
               <p className="text-white/80 text-base md:text-xl mb-8 px-2">
                 {slide.body}
               </p>
-              <Link
-                to="/contact"
-                className="group relative overflow-hidden inline-flex items-center pl-5 sm:pl-8 md:pl-10 pr-4 sm:pr-5 md:pr-6 py-2 sm:py-3 md:py-3 bg-accent-500 text-gray-900 rounded-full font-semibold shadow-lg mb-6 sm:mb-10 md:mb-16 text-sm sm:text-base md:text-lg border-2 border-transparent hover:border-accent-500 transition-all duration-300"
-              >
-                <span className="relative z-10 transition-colors duration-300 group-hover:text-white">Discover More</span>
-                <span className="absolute inset-0 bg-black transform translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-in-out"></span>
-                <span className="ml-3 sm:ml-4 md:ml-5 flex items-center justify-center h-7 w-7 sm:h-8 sm:w-8 md:h-10 md:w-10 rounded-full bg-primary-600 group-hover:bg-accent-500 transition-all duration-300 relative z-10">
-                  <svg
-                    className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 stroke-white group-hover:stroke-black transition-all duration-300"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    strokeWidth={2}
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="M7 17 17 7" />
-                    <path d="M7 7h10v10" />
-                  </svg>
-                </span>
-              </Link>
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">  
+                <Link
+                  to="/advanced-calculator"
+                  className="group relative overflow-hidden inline-flex items-center pl-5 sm:pl-8 md:pl-10 pr-4 sm:pr-5 md:pr-6 py-2 sm:py-3 md:py-3 bg-accent-500 text-gray-900 rounded-full font-semibold shadow-lg text-sm sm:text-base md:text-lg border-2 border-transparent hover:border-accent-500 transition-all duration-300"
+                >
+                  <span className="relative z-10 transition-colors duration-300 group-hover:text-white">Try Advanced Calculator</span>
+                  <span className="absolute inset-0 bg-black transform translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-in-out"></span>
+                  <span className="ml-3 sm:ml-4 md:ml-5 flex items-center justify-center h-7 w-7 sm:h-8 sm:w-8 md:h-10 md:w-10 rounded-full bg-primary-600 group-hover:bg-accent-500 transition-all duration-300 relative z-10">
+                    <svg
+                      className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 stroke-white group-hover:stroke-black transition-all duration-300"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M5 12h14" />
+                      <path d="M12 5l7 7-7 7" />
+                    </svg>
+                  </span>
+                </Link>
+                
+                <Link
+                  to="/contact"
+                  className="group relative overflow-hidden inline-flex items-center pl-5 sm:pl-8 md:pl-10 pr-4 sm:pr-5 md:pr-6 py-2 sm:py-3 md:py-3 bg-transparent text-white rounded-full font-semibold shadow-lg text-sm sm:text-base md:text-lg border-2 border-white hover:border-accent-500 transition-all duration-300"
+                >
+                  <span className="relative z-10 transition-colors duration-300 group-hover:text-white">Discover More</span>
+                  <span className="absolute inset-0 bg-accent-500 transform translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-in-out"></span>
+                  <span className="ml-3 sm:ml-4 md:ml-5 flex items-center justify-center h-7 w-7 sm:h-8 sm:w-8 md:h-10 md:w-10 rounded-full bg-white group-hover:bg-accent-500 transition-all duration-300 relative z-10">
+                    <svg
+                      className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 stroke-primary-600 group-hover:stroke-white transition-all duration-300"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      strokeWidth={2}
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M7 17 17 7" />
+                      <path d="M7 7h10v10" />
+                    </svg>
+                  </span>
+                </Link>
+              </div>
             </motion.div>
           </AnimatePresence>
         </div>

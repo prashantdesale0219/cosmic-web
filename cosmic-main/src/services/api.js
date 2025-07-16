@@ -181,4 +181,11 @@ export const intelligentSolutionService = {
   reorderSolutions: (items) => api.put('/intelligent-solution/reorder', { items }),
 };
 
+export const chatService = {
+  sendMessage: (message, conversationId) => api.post('/chat/message', { message, conversationId }),
+  getConversationHistory: (conversationId) => api.get(`/chat/history/${conversationId}`),
+  clearConversation: (conversationId) => api.delete(`/chat/history/${conversationId}`),
+  calculateROI: (monthlyBill, state) => api.post('/chat/roi', { monthlyBill, state }),
+};
+
 export default api;

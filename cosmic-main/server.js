@@ -107,6 +107,30 @@ app.get('/api/intelligent-solution/active', (req, res) => {
   });
 });
 
+app.get('/api/blog-posts/active', (req, res) => {
+  res.json({
+    success: true,
+    data: [
+      { id: 1, title: 'The Future of Solar Energy', author: 'Admin', date: '2024-07-20', image: '/newsimage.jpeg' },
+      { id: 2, title: 'Maximizing Your Solar Investment', author: 'Admin', date: '2024-07-18', image: '/newsimage.jpeg' }
+    ]
+  });
+});
+
+app.get('/api/homepage', (req, res) => {
+  res.json({
+    success: true,
+    energySolutions: [{ id: 1, name: 'Residential Solar', description: 'Complete solar solutions for your home.' }],
+    products: [{ id: 1, name: 'Solar Panels', description: 'High-efficiency solar panels.' }],
+    projects: [{ id: 1, name: 'Rooftop Installation', location: 'Mumbai', image: '/installation.jpg' }],
+    testimonials: [{ id: 1, name: 'Satisfied Customer', message: 'Great service and professional installation.' }],
+    teamMembers: [{ id: 1, name: 'John Doe', position: 'Lead Engineer', image: '/team-member.jpg' }],
+    blogPosts: [{ id: 1, title: 'The Future of Solar Energy', author: 'Admin', date: '2024-07-20', image: '/newsimage.jpeg' }],
+    faqs: [{ id: 1, question: 'How long does installation take?', answer: 'Typically 1-2 days for a residential system.' }],
+    settings: { siteName: 'Cosmic Powertech Solutions' }
+  });
+});
+
 // Fallback route for SPA
 app.get('*', (req, res) => {
   res.status(404).json({ message: 'API endpoint not found' });

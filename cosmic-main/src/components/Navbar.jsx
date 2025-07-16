@@ -38,10 +38,10 @@ export default function Navbar() {
       label: "About", 
       href: "/about",
       submenu: [
-        { label: "About Us", href: "/about" },
         { label: "Director's Desk", href: "/director-desk" },
-        { label: "Team Celebration", href: "/team-celebration" },
-        { label: "Company Culture", href: "/company-culture" }
+        { label: "Company Culture", href: "/company-culture" },
+        { label: "Team Celebration", href: "/team-celebration" }
+        
         
       ]
     },
@@ -56,15 +56,22 @@ export default function Navbar() {
     },
     { label: "Services", href: "/services" },
     { label: "Projects", href: "/projects" },
-    { label: "Calculator", href: "/calculator" },
+    { 
+      label: "Calculator", 
+      href: "/calculator",
+      submenu: [
+        { label: "Basic Calculator", href: "/calculator" },
+        { label: "Advanced Calculator", href: "/advanced-calculator" }
+      ]
+    },
     { 
       label: "Media", 
-      href: "/blog",
+      href: "/media",
       submenu: [
         { label: "Blog", href: "/blog" },
-        { label: "All Posts", href: "/blog" },
-        { label: "PR Page", href: "/pr" },
-        { label: "Achievements & Awards", href: "/achievements-awards" }
+        { label: "All Posts", href: "/blog/all" },
+        { label: "News", href: "/blog/news" },
+        { label: "Press Releases", href: "/blog/press" }
       ]
     },
     { label: "Contact", href: "/contact" },

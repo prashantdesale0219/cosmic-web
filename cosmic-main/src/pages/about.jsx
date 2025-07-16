@@ -6,6 +6,9 @@ import AwardsTimeline from "../components/AwardsTimeline";
 import ServicesSection from "../components/ServicesSection";
 import SolarDesignSection from "../components/SolarDesignSection";
 import TeamSection from "../components/TeamSection";
+import Testimonials from "../components/Testimonials";
+import { FaCheck } from "react-icons/fa";
+import { Helmet } from "react-helmet";
 
 const fadeUpVariant = {
   hidden: { opacity: 0, y: 60 },
@@ -484,16 +487,9 @@ const About = () => {
         <SolarDesignSection />
       </motion.div>
 
-      <motion.div
-        variants={fadeUpVariant}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-      >
-        <AwardsTimeline />
-      </motion.div>
+      
 
-      {/* LEADERSHIP TEAM SECTION */}
+      {/* vision mission section */}
       <motion.section
         initial="hidden"
         whileInView="visible"
@@ -564,15 +560,19 @@ energy, driving positive change and contributing to a sustainable future for all
         </div>
       </motion.section>
 
-    
-
       <motion.section
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
         variants={fadeUpVariant}
-        className="py-16 px-4 sm:px-6 lg:px-8 bg-white"
-      ></motion.section>
+        className="py-26 px-4 sm:px-6 lg:px-8 bg-gray-50"
+      >
+        <div className="container mx-auto w-1000">
+          <Testimonials />
+        </div>
+      </motion.section>
+
+
     </div>
   );
 };
