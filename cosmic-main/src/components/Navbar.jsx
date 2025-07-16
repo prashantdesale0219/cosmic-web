@@ -68,7 +68,8 @@ export default function Navbar() {
         { label: "Blog", href: "/blog" },
         { label: "All Posts", href: "/blog" },
         { label: "News", href: "/blog?category=news" },
-        { label: "Press Releases", href: "/pr" }
+        { label: "Press Releases", href: "/pr" },
+        { label: "Awards and Achievements", href: "/achievements-awards" }
       ]
     },
     { label: "Contact", href: "/contact" },
